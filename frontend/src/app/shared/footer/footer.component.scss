@@ -1,0 +1,126 @@
+@import "../../../assets/styles/variables";
+
+.footer {
+  padding: 40px 0 54px 0;
+  background-color: $light-blue-color;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+
+    .footer-upper-part {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+
+      .footer-upper-part-menu {
+        display: flex;
+        align-items: center;
+        margin-left: 40px;
+
+        nav ul {
+          display: flex;
+          margin: 0;
+          padding: 0;
+
+          li {
+            margin-right: 20px;
+            list-style: none;
+            border-bottom: 1px solid transparent;
+
+            &:active {
+              border-bottom: 1px solid $dark-blue-color;
+            }
+
+            a {
+              font-weight: 500;
+              font-size: 16px;
+              color: $dark-blue-color;
+              cursor: pointer;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+
+    .footer-lower-part {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: start;
+      margin-top: 40px;
+
+      .footer-lower-part-item {
+        max-width: 253px;
+        margin-right: 60px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .item-header {
+          font-weight: 500;
+          font-size: 16px;
+          color: $usual-blue-color;
+          margin-bottom: 12px;
+        }
+
+        .item-describe {
+          font-style: normal;
+          font-size: 16px;
+          color: $dark-blue-color;
+          line-height: 130%;
+          margin-bottom: 10px;
+        }
+
+        .item-actions {
+          font-size: 14px;
+
+          button {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            width: 153px;
+            height: 36px;
+            background: $usual-blue-color;
+            border-radius: 5px;
+            border: none;
+            font-style: normal;
+            font-size: 14px;
+            color: #FFFFFF;
+            cursor: pointer;
+
+            &:hover {
+              background: $active-blue-color;
+            }
+          }
+
+          a {
+            cursor: pointer;
+            text-decoration: none;
+          }
+
+          .icons-block {
+            margin-top: 17px;
+
+            a {
+              margin-top: 4px;
+              margin-left: 2px;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+
+    .footer-under-lower-part {
+      margin-top: 6px;
+      font-style: normal;
+      font-size: 16px;
+      color: $usual-blue-color;
+    }
+  }
+}

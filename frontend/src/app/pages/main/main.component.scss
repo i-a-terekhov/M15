@@ -1,0 +1,17 @@
+.main {
+  height: 3760px;  // высота из фрейма Desktop, для удобства использования PixelPerfect на время верстки футера
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    .content {
+      height: 100%;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

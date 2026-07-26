@@ -1,0 +1,73 @@
+@import "../../../assets/styles/variables";
+
+.header {
+  padding: 40px 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    svg {
+    }
+
+    .header-menu {
+      display: flex;
+      align-items: center;
+      padding-left: 75px;
+      padding-right: 200px;
+
+      nav ul {
+        display: flex;
+        margin: 0;
+        padding: 0;
+
+        li {
+          margin-right: 30px;
+          list-style: none;
+          border-bottom: 1px solid transparent;
+
+          &.active {
+            border-bottom: 1px solid $dark-blue-color;
+          }
+
+          a {
+            font-weight: 500;
+            font-size: 16px;
+            color: $dark-blue-color;
+            cursor: pointer;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+    .header-phone {
+      font-weight: 500;
+      font-size: 16px;
+      color: $usual-blue-color;
+    }
+
+    .login-action {
+      display: flex;
+      align-items: center;
+      min-width: 200px;
+      justify-content: right;
+
+      a {
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+
+        span {
+          font-weight: 500;
+          font-size: 16px;
+          color: $dark-violent-color;
+          margin-top: 2px;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}
