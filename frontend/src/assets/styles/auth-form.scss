@@ -64,7 +64,7 @@
       width: 422px;
       text-align: center;
       padding: 14px 40px;
-      background: #709FDC;
+      background: $usual-blue-color;
       border-radius: 5px;
       cursor: pointer;
       border: 1px solid transparent;
@@ -74,6 +74,15 @@
       font-size: 16px;
       line-height: 122%;
       letter-spacing: 1.2px;
+      transition: 0.1s;
+
+      &:hover {
+        background: $hover-blue-color;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
     }
   }
 

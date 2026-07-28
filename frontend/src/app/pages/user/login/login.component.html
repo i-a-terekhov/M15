@@ -1,19 +1,31 @@
-<section class="login">
+<section class="login" [formGroup]="loginForm">
   <div class="container">
     <div class="auth-form">
       <div class="auth-title">
         Войти в личный кабинет
       </div>
       <div class="auth-inputs">
-        <div class="auth-input"><input type="email" class="input" placeholder="Электронная почта"></div>
-        <div class="auth-input"><input type="password" class="input" placeholder="Пароль"></div>
+        <div class="auth-input">
+          <input type="email" class="input"
+                 [ngStyle]="{'border-color': isFieldInvalid('email') ? 'red' : ''}"
+                 placeholder="Электронная почта" formControlName="email">
+        </div>
+        <div class="auth-input">
+          <input type="password" class="input"
+                 [ngStyle]="{'border-color': isFieldInvalid('password') ? 'red' : ''}"
+                 placeholder="Пароль" formControlName="password">
+        </div>
         <div class="auth-checkbox">
-          <input type="checkbox" id="remember-me-checkbox">
+          <input type="checkbox" id="remember-me-checkbox"  formControlName="rememberMe">
           <label for="remember-me-checkbox">Запомнить меня</label>
         </div>
       </div>
       <div class="auth-button">
-        <button class="button">Войти</button>
+        <button class="button"
+                [ngStyle]="{'background': loginForm.invalid && (loginForm.touched || loginForm.dirty) ? '#91acc6' : ''}"
+                (click)="login()">
+          Войти
+        </button>
       </div>
       <div class="auth-link">
         Нет аккаунта? <a routerLink="/signup">Пройдите регистрацию</a>
