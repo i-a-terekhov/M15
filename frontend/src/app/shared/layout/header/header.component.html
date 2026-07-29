@@ -18,12 +18,23 @@
       +7 (499) 343-13-34
     </a>
     <div class="login-action">
-      <a routerLink="/login">
+      <a routerLink="/login" *ngIf="!isLoggedIn">
         <svg width="24" height="24">
           <use href="../../../assets/icons/icons.svg#user-icon"></use>
         </svg>
         <span>Войти</span>
       </a>
+      <a [matMenuTriggerFor]="menu" *ngIf="isLoggedIn">
+        <svg width="24" height="24">
+          <use href="../../../assets/icons/icons.svg#user-icon"></use>
+        </svg>
+        <span>ВОЙДЕНО, ЮЗЕРНЕЙМ С БЕКЕНДА</span>
+      </a>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <span (click)="logout()">Выйти</span>
+        </button>
+      </mat-menu>
     </div>
   </div>
 </header>
