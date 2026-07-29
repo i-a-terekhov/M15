@@ -26,6 +26,12 @@ export class AuthService {
     })
   }
 
+  signup(name: string, email: string, password: string): Observable<DefaultResponseType | LoginResponseType> {
+    return this.http.post<DefaultResponseType | LoginResponseType>(`${environment.api}signup`, {
+      name, email, password
+    });
+  }
+
   logout(): Observable<DefaultResponseType> {
     const tokens = this.getTokens();
     if (tokens && tokens.refreshToken) {
