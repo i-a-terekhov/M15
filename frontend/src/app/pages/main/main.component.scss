@@ -1,17 +1,507 @@
+@import "../../../assets/styles/variables";
+
 .main {
-  height: 3760px;  // высота из фрейма Desktop, для удобства использования PixelPerfect на время верстки футера
 
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    gap: 120px;
 
-    .content {
-      height: 100%;
+    .chapter {
       width: 100%;
-      text-align: center;
+
+      .chapter-title {
+        font-family: 'Lora', serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 38px;
+        line-height: 130%;
+        color: $usual-blue-color;
+
+        &--our-services {
+          margin-bottom: 40px;
+        }
+
+        &--popular {
+          margin-bottom: 40px;
+          margin-top: -2px;
+        }
+
+        &--reviews {
+          margin-bottom: 19px;
+        }
+
+        &--contacts {
+          margin-bottom: -1px;
+        }
+      }
+
+      .carousel {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 26px;
+      }
+    }
+
+    .chapter-banner {
+      position: relative;
+      overflow: hidden;
+      background-image: url("../../../assets/images/banner/Image(1).png");
+      background-repeat: no-repeat;
+      background-position-x: calc(50% + 244px);
+      z-index: -1;
+
+      .banner-content {
+        width: 100%;
+        height: 500px;
+        box-sizing: border-box;
+        padding: 86px 80px;
+        position: relative;
+        z-index: 1;
+
+        .category-title {
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          letter-spacing: 0.4em;
+          text-transform: uppercase;
+          color: $usual-blue-color;
+
+          &.additional-margin {
+            margin-top: 15px;
+          }
+        }
+
+        .title {
+          font-family: 'Lora', serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 50px;
+          line-height: 130%;
+          color: #FFFFFF;
+          margin-bottom: 20px;
+
+          span {
+            color: $usual-blue-color;
+          }
+        }
+
+        .additional-text {
+          //padding-top: 20px;
+        }
+
+        .button {
+          margin-top: 20px;
+          text-align: center;
+          padding: 14px 34px;
+          background: $usual-blue-color;
+          border-radius: 5px;
+          cursor: pointer;
+          border: 1px solid transparent;
+
+          font-style: normal;
+          color: #FFFFFF;
+          font-size: 16px;
+          line-height: 122%;
+          letter-spacing: 1.2px;
+          transition: 0.1s;
+
+          &:hover {
+            background: $hover-blue-color;
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
+        }
+      }
+
+      .banner-eclipse {
+        position: absolute;
+        border-radius: 50%;
+        background-color: $light-blue-color;
+
+        // ПОЗИЦИЯ: На 1250px равен calc(-500px - 35%), на 400px плавно опускается ниже
+        // Внимание: минимальное и максимальное значения в clamp() переставлены местами,
+        // так как математически (-500px - 35%) МЕНЬШЕ, чем (-500px + 15%)
+        top: clamp(calc(-518px - 37%), calc(-500px - 58.82vw + 385.3px), calc(-500px + 15%));
+        left: calc(-8px - 56%);
+
+        // ГАБАРИТЫ: На 1250px круг равен 1405px, на 400px плавно уменьшается до 1250px
+        width: clamp(1050px, calc(18.24vw + 1177px), 1405px);
+        height: clamp(1050px, calc(18.24vw + 1177px), 1405px);
+      }
+    }
+
+    .chapter-our-services {
+
+      .our-services-card-carousel {
+
+        .our-services-card {
+          width: 290px;
+          height: 498px;
+
+          .card-image {
+            width: 291px;
+            height: 291px;
+            border-radius: 5px;
+            background-size: cover;
+            background-position: center;
+          }
+
+          .card-title {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 130%;
+            color: $usual-blue-color;
+            margin-top: 15px;
+            margin-bottom: 10px;
+          }
+
+          .card-description {
+            height: 90px;
+            font-style: normal;
+            font-size: 14px;
+            line-height: 130%;
+            color: $dark-blue-color;
+            overflow: hidden;
+          }
+
+          .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+
+            .price {
+              font-style: normal;
+              font-weight: 600;
+              font-size: 20px;
+              line-height: 130%;
+              color: $usual-blue-color;
+            }
+
+            .card-button {
+              text-align: center;
+              padding: 14px 35px;
+              background: $usual-blue-color;
+              border-radius: 5px;
+              cursor: pointer;
+              border: 1px solid transparent;
+
+              font-style: normal;
+              color: #FFFFFF;
+              font-size: 16px;
+              line-height: 122%;
+              letter-spacing: 1.2px;
+              transition: 0.1s;
+
+              &:hover {
+                background: $hover-blue-color;
+              }
+
+              &:active {
+                transform: scale(0.95);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .chapter-about-us {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 68px;
+
+      .about-picture {
+        width: 460px;
+        height: 453px;
+        background-image: url("../../../assets/images/pages/advantages.png");
+        background-repeat: no-repeat;
+        background-position-x: calc(0% + 0px);
+        z-index: -1;
+      }
+
+      .about-content {
+        max-width: 712px;
+
+        .description {
+          margin-top: 20px;
+          margin-bottom: 40px;
+          font-style: normal;
+          font-size: 14px;
+          line-height: 130%;
+          color: $dark-violent-color;
+          max-width: 620px;
+
+          span {
+            font-style: normal;
+            font-weight: 500;
+          }
+        }
+
+        .subtitle {
+          font-family: 'Lora', serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 26px;
+          line-height: 130%;
+          color: $usual-blue-color;
+          margin-bottom: 18px;
+        }
+
+        .advantages {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 20px;
+          max-width: 704px;
+
+          .advantage {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            .advantage-number {
+              position: relative;
+              font-family: 'Lora', serif;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 50px;
+              line-height: 130%;
+              color: $usual-blue-color;
+              width: 38px;
+              text-align: center;
+
+              &::after {
+                content: '';
+                position: absolute;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                left: 0px;
+                top: 20px;
+                background: $light-blue-color;
+                z-index: -1;
+              }
+            }
+
+            .advantage-description {
+              max-width: 257px;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 130%;
+              color: $dark-violent-color;
+            }
+          }
+        }
+      }
+    }
+
+    // chapter-about-us по стилям почти полностью совпадает chapter-our-services.
+    // Отличающиеся стили будут помечены комментарием для дальнейшей оптимизации при отторжении карточки в компонент
+    .chapter-popular {
+
+      .popular-card-carousel {
+
+        .popular-card {
+          width: 290px;
+          height: 571px; // new
+          display: flex; // new
+          flex-direction: column; // new
+          position: relative; // new
+
+          .card-image {
+            width: 291px;
+            height: 291px;
+            border-radius: 5px;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0; // new
+          }
+
+          .card-title {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 130%;
+            color: $usual-blue-color;
+            margin-top: 15px;
+            margin-bottom: 19px; // new
+          }
+
+          .card-description {
+            //height: 130px;   // new
+            font-style: normal;
+            font-size: 14px;
+            line-height: 130%;
+            color: $dark-blue-color;
+            overflow: hidden;
+            flex-grow: 1; // new
+            width: 287px; // new
+          }
+
+          .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            align-self: start; // new
+            flex-shrink: 0; // new
+
+            .link-to-article {
+              font-style: normal;
+              font-size: 16px;
+              line-height: 130%;
+              text-decoration-line: underline;
+              color: $usual-blue-color;
+            }
+          }
+
+          .category-absolute-label {
+            position: absolute;
+            padding: 10px 18px;
+            right: 8px;
+            top: 10px;
+            background: #FFFFFF;
+            border-radius: 5px;
+
+            font-style: normal;
+            font-size: 11px;
+            line-height: 130%;
+            color: $usual-blue-color;
+          }
+        }
+      }
+
+      .popular-footer {
+        margin-top: 40px;
+        display: flex;
+        justify-content: end;
+
+        .link-to-blog {
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+
+          span {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 130%;
+            color: $usual-blue-color;
+          }
+
+          svg {
+            margin-left: 14px;
+          }
+        }
+
+      }
+    }
+
+    .chapter-reviews {
+      .reviews-card-carousel {
+        .reviews-card {
+          width: 396px;
+          height: 267px;
+          box-sizing: border-box;
+          background: #FFFFFF;
+          border: 1.5px solid $usual-blue-color;
+          border-radius: 5px;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          padding: 30px;
+
+          .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 14px;
+
+            .user-image {
+              width: 60px;
+              height: 60px;
+              margin-right: 26px;
+            }
+
+            span {
+              font-style: normal;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 130%;
+              color: $usual-blue-color;
+            }
+          }
+
+          .card-user-review {
+            font-style: normal;
+            font-size: 16px;
+            line-height: 140%;
+            color: $dark-blue-color;
+          }
+        }
+      }
+    }
+
+    .chapter-contacts {
+      display: flex;
+      gap: 26px;
+
+      .contacts-map {
+        width: 607px;
+        height: 438px;
+        background-color: $usual-blue-color;
+        text-align: center;
+      }
+
+      .contacts-content {
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: flex-start;
+
+        .contact-block {
+          margin-top: 20px;
+
+          .subtitle {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 130%;
+            color: $usual-blue-color;
+            margin-bottom: 9px;
+
+            &:last-child {
+              margin-bottom: 10px;
+            }
+          }
+
+          span {
+            margin-top: 10px;
+            font-style: normal;
+            font-size: 14px;
+            line-height: 130%;
+            color: $dark-blue-color;
+          }
+
+          .media-icons {
+            svg {
+              margin-right: 20px;
+            }
+          }
+        }
+      }
     }
   }
 }
