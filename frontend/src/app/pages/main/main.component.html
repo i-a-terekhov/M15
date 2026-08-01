@@ -9,6 +9,10 @@
         <button class="button">Подробнее</button>
       </div>
       <div class="banner-eclipse"></div>
+      <div class="banner-arrows">
+        <div class="move-backward" style="background-image: url('assets/images/banner/Previous.png')"></div>
+        <div class="move-forward" style="background-image: url('assets/images/banner/Next.png')"></div>
+      </div>
     </div>
 
     <!--    #PART CHAPTER ---------- 2  -->
@@ -193,7 +197,7 @@
         <a href="" class="link-to-blog">
           <span>Перейти в блог</span>
           <svg width="16" height="16">
-            <use href="../../assets/icons/icons.svg#arrow-right"></use>
+            <use href="../../assets/icons/arrows.svg#popular-link-arrow-right"></use>
           </svg>
         </a>
       </div>
@@ -202,47 +206,29 @@
     <!--    #PART CHAPTER ---------- 5  -->
     <div class="chapter chapter-reviews">
       <div class="chapter-title chapter-title--reviews">Отзывы о нашей работе</div>
-      <div class="carousel reviews-card-carousel">
-        <div class="reviews-card">
-          <div class="card-header">
-            <div class="user-image"
-                 style="background-image: url('assets/images/reviews-cards/Ellipse 25(1).png')"></div>
-            <span>Станислав</span>
+      <owl-carousel-o [options]="customOptions" class="carousel reviews-card-carousel" #owlCar>
+        <ng-template carouselSlide *ngFor="let review of reviews">
+          <div class="reviews-card">
+            <div class="card-header">
+              <div class="user-image" style="background-image: url({{ review.image }})"></div>
+              <span>{{ review.name }}</span>
+            </div>
+            <div class="card-user-review">{{ review.text }}</div>
           </div>
-          <div class="card-user-review">
-            Спасибо огромное АйтиШторму за прекрасный блог с полезными статьями! Именно они и побудили меня углубиться в
-            тему SMM и начать свою карьеру.
-          </div>
-        </div>
-        <div class="reviews-card">
-          <div class="card-header">
-            <div class="user-image"
-                 style="background-image: url('assets/images/reviews-cards/Ellipse 25(2).png')"></div>
-            <span>Алёна</span>
-          </div>
-          <div class="card-user-review">
-            Обратилась в АйтиШторм за помощью копирайтера. Ни разу ещё не пожалела! Ребята действительно вкладывают душу
-            в то, что делают, и каждый текст, который я получаю, с нетерпением хочется выложить в сеть.
-          </div>
-        </div>
-        <div class="reviews-card">
-          <div class="card-header">
-            <div class="user-image"
-                 style="background-image: url('assets/images/reviews-cards/Ellipse 25(3).png')"></div>
-            <span>Мария</span>
-          </div>
-          <div class="card-user-review">
-            Команда АйтиШторма за такой короткий промежуток времени сделала невозможное: от простой фирмы по услуге
-            продвижения выросла в мощный блог о важности личного бренда. Класс!
-          </div>
-        </div>
+        </ng-template>
+      </owl-carousel-o>
+      <div class="reviews-arrows">
+        <a class="move-backward" (click)="owlCar.prev()" style="background-image: url('assets/images/reviews-cards/Previous.png')"></a>
+        <a class="move-forward" (click)="owlCar.next()" style="background-image: url('assets/images/reviews-cards/Next.png')"></a>
       </div>
     </div>
 
     <!--    #PART CHAPTER ---------- 6  -->
     <div class="chapter chapter-contacts">
       <div class="contacts-map">
-        БУДУЩАЯ КАРТА
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?um=constructor%3A1668d5f20bd636f52351b07d005af2c79f6aeb5780489b45087daddd228b5b22&amp;source=constructor"
+          width="607" height="438" frameborder="0"></iframe>
       </div>
       <div class="contacts-content">
         <div class="chapter-title chapter-title--contacts">Контакты</div>

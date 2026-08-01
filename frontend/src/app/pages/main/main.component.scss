@@ -53,7 +53,6 @@
       background-image: url("../../../assets/images/banner/Image(1).png");
       background-repeat: no-repeat;
       background-position-x: calc(50% + 244px);
-      z-index: -1;
 
       .banner-content {
         width: 100%;
@@ -134,6 +133,28 @@
         // ГАБАРИТЫ: На 1250px круг равен 1405px, на 400px плавно уменьшается до 1250px
         width: clamp(1050px, calc(18.24vw + 1177px), 1405px);
         height: clamp(1050px, calc(18.24vw + 1177px), 1405px);
+      }
+
+      .banner-arrows {
+
+        .move-backward, .move-forward {
+          position: absolute;
+          top: calc(50% - 14px);
+          width: 15px;
+          height: 28px;
+          background-size: cover;
+          background-position: center;
+          cursor: pointer;
+          z-index: 2;
+        }
+
+        .move-backward {
+          left: 10px;
+        }
+
+        .move-forward {
+          right: 10px;
+        }
       }
     }
 
@@ -410,9 +431,11 @@
     }
 
     .chapter-reviews {
+      position: relative;
+
       .reviews-card-carousel {
         .reviews-card {
-          width: 396px;
+          width: 395px;
           height: 267px;
           box-sizing: border-box;
           background: #FFFFFF;
@@ -448,6 +471,29 @@
             font-size: 16px;
             line-height: 140%;
             color: $dark-blue-color;
+          }
+        }
+      }
+
+      .reviews-arrows {
+
+        a {
+          top: calc(50% + 20px);
+          width: 10px;
+          height: 19px;
+          background-size: cover;
+          background-position: center;
+          cursor: pointer;
+          display: flex;
+          position: absolute;
+          z-index: 2;
+
+          &.move-backward {
+            left: -23px;
+          }
+
+          &.move-forward {
+            right: -23px;
           }
         }
       }
