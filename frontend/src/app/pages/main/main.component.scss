@@ -38,7 +38,7 @@
         }
       }
 
-      .carousel {
+      .pseudo-carousel {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -49,94 +49,139 @@
 
     .chapter-banner {
       position: relative;
-      overflow: hidden;
-      background-image: url("../../../assets/images/banner/Image(1).png");
-      background-repeat: no-repeat;
-      background-position-x: calc(50% + 244px);
 
-      .banner-content {
-        width: 100%;
-        height: 500px;
-        box-sizing: border-box;
-        padding: 86px 80px;
-        position: relative;
-        z-index: 1;
+      ::ng-deep .owl-carousel .owl-dots {
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        right: 0;
+        margin-top: 0;
+        z-index: 10;
 
-        .category-title {
-          font-style: normal;
-          font-weight: 600;
-          font-size: 12px;
-          letter-spacing: 0.4em;
-          text-transform: uppercase;
-          color: $usual-blue-color;
-
-          &.additional-margin {
-            margin-top: 15px;
-          }
-        }
-
-        .title {
-          font-family: 'Lora', serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 50px;
-          line-height: 130%;
-          color: #FFFFFF;
-          margin-bottom: 20px;
+        .owl-dot {
+          box-sizing: border-box;
+          margin: 0 10px;
 
           span {
-            color: $usual-blue-color;
+            background: transparent;
+            border: 1px white solid;
+            width: 8px;
+            height: 8px;
+            margin: 1px 0px;
           }
         }
 
-        .additional-text {
-          //padding-top: 20px;
-        }
-
-        .button {
-          margin-top: 20px;
-          text-align: center;
-          padding: 14px 34px;
-          background: $usual-blue-color;
-          border-radius: 5px;
-          cursor: pointer;
-          border: 1px solid transparent;
-
-          font-style: normal;
-          color: #FFFFFF;
-          font-size: 16px;
-          line-height: 122%;
-          letter-spacing: 1.2px;
-          transition: 0.1s;
-
-          &:hover {
-            background: $hover-blue-color;
-          }
-
-          &:active {
-            transform: scale(0.95);
-          }
+        .owl-dot.active span,
+        .owl-dot:hover span {
+          background: white;
         }
       }
 
-      .banner-eclipse {
-        position: absolute;
-        border-radius: 50%;
-        background-color: $light-blue-color;
+      .banner {
+        width: 1240px;
+        height: 500px;
+        position: relative;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-position-x: calc(50% + 244px);
 
-        // ПОЗИЦИЯ: На 1250px равен calc(-500px - 35%), на 400px плавно опускается ниже
-        // Внимание: минимальное и максимальное значения в clamp() переставлены местами,
-        // так как математически (-500px - 35%) МЕНЬШЕ, чем (-500px + 15%)
-        top: clamp(calc(-518px - 37%), calc(-500px - 58.82vw + 385.3px), calc(-500px + 15%));
-        left: calc(-8px - 56%);
+        .banner-eclipse {
+          position: absolute;
+          border-radius: 50%;
+          background-color: $light-blue-color;
 
-        // ГАБАРИТЫ: На 1250px круг равен 1405px, на 400px плавно уменьшается до 1250px
-        width: clamp(1050px, calc(18.24vw + 1177px), 1405px);
-        height: clamp(1050px, calc(18.24vw + 1177px), 1405px);
+          // ПОЗИЦИЯ: На 1250px равен calc(-500px - 35%), на 400px плавно опускается ниже
+          // Внимание: минимальное и максимальное значения в clamp() переставлены местами,
+          // так как математически (-500px - 35%) МЕНЬШЕ, чем (-500px + 15%)
+          top: clamp(calc(-518px - 37%), calc(-500px - 58.82vw + 385.3px), calc(-500px + 15%));
+          left: calc(-8px - 56%);
+
+          // ГАБАРИТЫ: На 1250px круг равен 1405px, на 400px плавно уменьшается до 1250px
+          width: clamp(1050px, calc(18.24vw + 1177px), 1405px);
+          height: clamp(1050px, calc(18.24vw + 1177px), 1405px);
+        }
+
+        .banner-content {
+
+          box-sizing: border-box;
+          padding: 72px 80px;
+          position: relative;
+          z-index: 1;
+
+          .additional-upper-space {
+            height: 14px;
+          }
+
+          .category-title {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: $usual-blue-color;
+
+            &.additional-margin {
+              margin-top: 15px;
+            }
+          }
+
+          .title {
+            font-family: 'Lora', serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 50px;
+            line-height: 130%;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+
+            ::ng-deep span {
+              color: $usual-blue-color;
+            }
+          }
+
+          .additional-text {
+            font-style: normal;
+            font-size: 24px;
+            line-height: 130%;
+            color: #FFFFFF;
+
+            ::ng-deep span {
+              color: $usual-blue-color;
+            }
+          }
+
+          .additional-lower-space {
+            height: 30px;
+          }
+
+          .button {
+            margin-top: 20px;
+            text-align: center;
+            padding: 14px 34px;
+            background: $usual-blue-color;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid transparent;
+
+            font-style: normal;
+            color: #FFFFFF;
+            font-size: 16px;
+            line-height: 122%;
+            letter-spacing: 1.2px;
+            transition: 0.1s;
+
+            &:hover {
+              background: $hover-blue-color;
+            }
+
+            &:active {
+              transform: scale(0.95);
+            }
+          }
+        }
       }
 
       .banner-arrows {
-
         .move-backward, .move-forward {
           position: absolute;
           top: calc(50% - 14px);
@@ -160,79 +205,77 @@
 
     .chapter-our-services {
 
-      .our-services-card-carousel {
+      .our-services-card {
+        width: 290px;
+        height: 498px;
 
-        .our-services-card {
-          width: 290px;
-          height: 498px;
+        .card-image {
+          width: 291px;
+          height: 291px;
+          border-radius: 5px;
+          background-size: cover;
+          background-position: center;
+        }
 
-          .card-image {
-            width: 291px;
-            height: 291px;
-            border-radius: 5px;
-            background-size: cover;
-            background-position: center;
-          }
+        .card-title {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 130%;
+          color: $usual-blue-color;
+          margin-top: 15px;
+          margin-bottom: 10px;
+        }
 
-          .card-title {
+        .card-description {
+          height: 90px;
+          font-style: normal;
+          font-size: 14px;
+          line-height: 130%;
+          color: $dark-blue-color;
+          overflow: hidden;
+        }
+
+        .card-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 15px;
+
+          .price {
             font-style: normal;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 20px;
             line-height: 130%;
             color: $usual-blue-color;
-            margin-top: 15px;
-            margin-bottom: 10px;
           }
 
-          .card-description {
-            height: 90px;
+          .card-button {
+            text-align: center;
+            padding: 14px 35px;
+            background: $usual-blue-color;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid transparent;
+
             font-style: normal;
-            font-size: 14px;
-            line-height: 130%;
-            color: $dark-blue-color;
-            overflow: hidden;
-          }
+            color: #FFFFFF;
+            font-size: 16px;
+            line-height: 122%;
+            letter-spacing: 1.2px;
+            transition: 0.1s;
 
-          .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-
-            .price {
-              font-style: normal;
-              font-weight: 600;
-              font-size: 20px;
-              line-height: 130%;
-              color: $usual-blue-color;
+            &:hover {
+              background: $hover-blue-color;
             }
 
-            .card-button {
-              text-align: center;
-              padding: 14px 35px;
-              background: $usual-blue-color;
-              border-radius: 5px;
-              cursor: pointer;
-              border: 1px solid transparent;
-
-              font-style: normal;
-              color: #FFFFFF;
-              font-size: 16px;
-              line-height: 122%;
-              letter-spacing: 1.2px;
-              transition: 0.1s;
-
-              &:hover {
-                background: $hover-blue-color;
-              }
-
-              &:active {
-                transform: scale(0.95);
-              }
+            &:active {
+              transform: scale(0.95);
             }
           }
         }
       }
+
     }
 
     .chapter-about-us {
@@ -332,77 +375,75 @@
     // Отличающиеся стили будут помечены комментарием для дальнейшей оптимизации при отторжении карточки в компонент
     .chapter-popular {
 
-      .popular-card-carousel {
+      .popular-card {
+        width: 290px;
+        height: 571px; // new
+        display: flex; // new
+        flex-direction: column; // new
+        position: relative; // new
 
-        .popular-card {
-          width: 290px;
-          height: 571px; // new
-          display: flex; // new
-          flex-direction: column; // new
-          position: relative; // new
+        .card-image {
+          width: 291px;
+          height: 291px;
+          border-radius: 5px;
+          background-size: cover;
+          background-position: center;
+          flex-shrink: 0; // new
+        }
 
-          .card-image {
-            width: 291px;
-            height: 291px;
-            border-radius: 5px;
-            background-size: cover;
-            background-position: center;
-            flex-shrink: 0; // new
-          }
+        .card-title {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 130%;
+          color: $usual-blue-color;
+          margin-top: 15px;
+          margin-bottom: 19px; // new
+        }
 
-          .card-title {
+        .card-description {
+          //height: 130px;   // new
+          font-style: normal;
+          font-size: 14px;
+          line-height: 130%;
+          color: $dark-blue-color;
+          overflow: hidden;
+          flex-grow: 1; // new
+          width: 287px; // new
+        }
+
+        .card-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 15px;
+          align-self: start; // new
+          flex-shrink: 0; // new
+
+          .link-to-article {
             font-style: normal;
-            font-weight: 500;
-            font-size: 20px;
+            font-size: 16px;
             line-height: 130%;
-            color: $usual-blue-color;
-            margin-top: 15px;
-            margin-bottom: 19px; // new
-          }
-
-          .card-description {
-            //height: 130px;   // new
-            font-style: normal;
-            font-size: 14px;
-            line-height: 130%;
-            color: $dark-blue-color;
-            overflow: hidden;
-            flex-grow: 1; // new
-            width: 287px; // new
-          }
-
-          .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            align-self: start; // new
-            flex-shrink: 0; // new
-
-            .link-to-article {
-              font-style: normal;
-              font-size: 16px;
-              line-height: 130%;
-              text-decoration-line: underline;
-              color: $usual-blue-color;
-            }
-          }
-
-          .category-absolute-label {
-            position: absolute;
-            padding: 10px 18px;
-            right: 8px;
-            top: 10px;
-            background: #FFFFFF;
-            border-radius: 5px;
-
-            font-style: normal;
-            font-size: 11px;
-            line-height: 130%;
+            text-decoration-line: underline;
             color: $usual-blue-color;
           }
         }
+
+        .category-absolute-label {
+          position: absolute;
+          padding: 10px 18px;
+          right: 8px;
+          top: 10px;
+          background: #FFFFFF;
+          border-radius: 5px;
+
+          font-style: normal;
+          font-size: 11px;
+          line-height: 130%;
+          color: $usual-blue-color;
+        }
       }
+
 
       .popular-footer {
         margin-top: 40px;
@@ -433,47 +474,46 @@
     .chapter-reviews {
       position: relative;
 
-      .reviews-card-carousel {
-        .reviews-card {
-          width: 395px;
-          height: 267px;
-          box-sizing: border-box;
-          background: #FFFFFF;
-          border: 1.5px solid $usual-blue-color;
-          border-radius: 5px;
+      .reviews-card {
+        width: 395px;
+        height: 267px;
+        box-sizing: border-box;
+        background: #FFFFFF;
+        border: 1.5px solid $usual-blue-color;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        padding: 30px;
+
+        .card-header {
           display: flex;
-          flex-direction: column;
-          align-items: start;
-          padding: 30px;
+          align-items: center;
+          margin-bottom: 14px;
 
-          .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 14px;
-
-            .user-image {
-              width: 60px;
-              height: 60px;
-              margin-right: 26px;
-            }
-
-            span {
-              font-style: normal;
-              font-weight: 600;
-              font-size: 18px;
-              line-height: 130%;
-              color: $usual-blue-color;
-            }
+          .user-image {
+            width: 60px;
+            height: 60px;
+            margin-right: 26px;
           }
 
-          .card-user-review {
+          span {
             font-style: normal;
-            font-size: 16px;
-            line-height: 140%;
-            color: $dark-blue-color;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 130%;
+            color: $usual-blue-color;
           }
         }
+
+        .card-user-review {
+          font-style: normal;
+          font-size: 16px;
+          line-height: 140%;
+          color: $dark-blue-color;
+        }
       }
+
 
       .reviews-arrows {
 
