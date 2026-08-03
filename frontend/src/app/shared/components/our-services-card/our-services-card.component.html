@@ -1,0 +1,9 @@
+<div class="our-services-card">
+  <div class="card-image" [style.background-image]="'url(\'' + ourService.image + '\')'"></div>
+  <div class="card-title">{{ ourService.title }}</div>
+  <div class="card-description">{{ ourService.description }}</div>
+  <div class="card-footer">
+    <div class="price">{{ ourService.priceDescription }}</div>
+    <button class="card-button">Подробнее</button>
+  </div>
+</div>

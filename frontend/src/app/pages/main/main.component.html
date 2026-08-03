@@ -32,76 +32,10 @@
     </div>
 
     <!--    #PART CHAPTER ---------- 2  -->
-    <div class="chapter chapter-our-services">
+    <div class="chapter chapter-our-services" *ngIf="ourServices">
       <div class="chapter-title chapter-title--our-services">Услуги, которые мы предлагаем</div>
       <div class="pseudo-carousel">
-        <div class="our-services-card">
-          <div class="card-image"
-               style="background-image: url('assets/images/service-cards/Rectangle 103(1).png')"></div>
-          <div class="card-title">Создание сайтов</div>
-          <div class="card-description">
-            В краткие сроки мы создадим качественный и самое главное продающий сайт для продвижения Вашего бизнеса!
-          </div>
-          <div class="card-footer">
-            <div class="price">
-              От 7 500₽
-            </div>
-            <button class="card-button">
-              Подробнее
-            </button>
-          </div>
-        </div>
-        <div class="our-services-card">
-          <div class="card-image"
-               style="background-image: url('assets/images/service-cards/Rectangle 103(2).png')"></div>
-          <div class="card-title">Продвижение</div>
-          <div class="card-description">
-            Вам нужен качественный SMM-специалист или грамотный таргетолог? Мы готовы оказать Вам услугу “Продвижения”
-            на наивысшем уровне!
-          </div>
-          <div class="card-footer">
-            <div class="price">
-              От 3 500₽
-            </div>
-            <button class="card-button">
-              Подробнее
-            </button>
-          </div>
-        </div>
-        <div class="our-services-card">
-          <div class="card-image"
-               style="background-image: url('assets/images/service-cards/Rectangle 103(3).png')"></div>
-          <div class="card-title">Реклама</div>
-          <div class="card-description">
-            Без рекламы не может обойтись ни один бизнес или специалист. Обращаясь к нам, мы гарантируем быстрый прирост
-            клиентов за счёт правильно настроенной рекламы.
-          </div>
-          <div class="card-footer">
-            <div class="price">
-              От 1 000₽
-            </div>
-            <button class="card-button">
-              Подробнее
-            </button>
-          </div>
-        </div>
-        <div class="our-services-card">
-          <div class="card-image"
-               style="background-image: url('assets/images/service-cards/Rectangle 103(4).png')"></div>
-          <div class="card-title">Копирайтинг</div>
-          <div class="card-description">
-            Наши копирайтеры готовы написать Вам любые продающие текста, которые не только обеспечат рост охватов, но и
-            помогут выйти на новый уровень в продажах.
-          </div>
-          <div class="card-footer">
-            <div class="price">
-              От 750₽
-            </div>
-            <button class="card-button">
-              Подробнее
-            </button>
-          </div>
-        </div>
+        <our-services-card [ourService]="ourService" *ngFor="let ourService of ourServices"></our-services-card>
       </div>
     </div>
 

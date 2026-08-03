@@ -1,0 +1,72 @@
+@import "../../../../assets/styles/variables";
+
+.our-services-card {
+  width: 290px;
+  height: 498px;
+
+  .card-image {
+    width: 291px;
+    height: 291px;
+    border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card-title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    color: $usual-blue-color;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  .card-description {
+    height: 90px;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 130%;
+    color: $dark-blue-color;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+
+    .price {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 130%;
+      color: $usual-blue-color;
+    }
+
+    .card-button {
+      text-align: center;
+      padding: 14px 35px;
+      background: $usual-blue-color;
+      border-radius: 5px;
+      cursor: pointer;
+      border: 1px solid transparent;
+
+      font-style: normal;
+      color: #FFFFFF;
+      font-size: 16px;
+      line-height: 122%;
+      letter-spacing: 1.2px;
+      transition: 0.1s;
+
+      &:hover {
+        background: $hover-blue-color;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}

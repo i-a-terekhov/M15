@@ -63,6 +63,33 @@ export class MainComponent {
     nav: false
   };
 
+  ourServices = [
+    {
+      image: 'assets/images/service-cards/Rectangle 103(1).png',
+      title: 'Создание сайтов',
+      description: 'В краткие сроки мы создадим качественный и самое главное продающий сайт для продвижения Вашего бизнеса!',
+      priceDescription: 'От 7 500₽',
+    },
+    {
+      image: 'assets/images/service-cards/Rectangle 103(2).png',
+      title: 'Продвижение',
+      description: 'Вам нужен качественный SMM-специалист или грамотный таргетолог? Мы готовы оказать Вам услугу “Продвижения” на наивысшем уровне!',
+      priceDescription: 'От 3 500₽',
+    },
+    {
+      image: 'assets/images/service-cards/Rectangle 103(3).png',
+      title: 'Реклама',
+      description: 'Без рекламы не может обойтись ни один бизнес или специалист. Обращаясь к нам, мы гарантируем быстрый прирост клиентов за счёт правильно настроенной рекламы.',
+      priceDescription: 'От 1 000₽',
+    },
+    {
+      image: 'assets/images/service-cards/Rectangle 103(4).png',
+      title: 'Копирайтинг',
+      description: 'Наши копирайтеры готовы написать Вам любые продающие текста, которые не только обеспечат рост охватов, но и помогут выйти на новый уровень в продажах.',
+      priceDescription: 'От 750₽',
+    },
+  ]
+
   reviews = [
     {
       image: 'assets/images/reviews-cards/review-01.png',
@@ -120,6 +147,4 @@ export class MainComponent {
     },
     nav: false
   };
-
-
 }
