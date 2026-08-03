@@ -33,3 +33,7 @@ html, body {
     }
   }
 }
+
+.mat-progress-spinner circle, mat-spinner circle {  // этот блок для кольцевого лоадера
+  stroke: $hover-blue-color;
+}

@@ -42,6 +42,17 @@ export class AuthService {
     throw throwError(() => 'Can not find token');
   }
 
+  refresh(): Observable<DefaultResponseType | LoginResponseType> {
+    const tokens = this.getTokens();
+    if (tokens && tokens.refreshToken) {
+      return this.http.post<DefaultResponseType | LoginResponseType>(`${environment.api}refresh`, {
+        refreshToken: tokens.refreshToken,
+      });
+    }
+    throw throwError(() => 'Can not find token');
+  }
+
+
   public getIsLoggedIn() {
     return this.isLogged;
   }
@@ -77,5 +88,9 @@ export class AuthService {
     } else {
       localStorage.removeItem(this.userIdKey);
     }
+  }
+
+  getUserInfo() {
+    // получаем данные юзера, основной пользователь - хэдер - для отображения имени пользователя.
   }
 }

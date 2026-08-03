@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 export class HeaderComponent {
 
   isLoggedIn: boolean = false;
+  userName = '';
 
   constructor(
     private authService: AuthService,
@@ -22,7 +23,10 @@ export class HeaderComponent {
 
   ngOnInit() {
     this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
-      this.isLoggedIn = isLoggedIn
+      this.isLoggedIn = isLoggedIn;
+      if (this.isLoggedIn) {
+        // запрос на получение имени юзера
+      }
     });
   }
 

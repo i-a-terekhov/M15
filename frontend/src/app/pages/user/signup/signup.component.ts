@@ -68,7 +68,7 @@ export class SignupComponent {
             if (errorResponse.error && errorResponse.error.message) {
               this.snackBar.open(errorResponse.error.message);
             } else {
-              this.snackBar.open('Ошибка регистрации');
+              this.snackBar.open('Ошибка соединения');
             }
           },
         });
