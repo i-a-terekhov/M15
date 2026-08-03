@@ -1,0 +1,11 @@
+<div class="banner" [style.background-image]="'url(\'' + banner.image + '\')'">
+  <div class="banner-eclipse"></div>
+  <div class="banner-content">
+    <div class="additional-upper-space" *ngIf="banner.additionalUpperSpace"></div>
+    <div class="category-title additional-margin">{{ banner.categoryTitle }}</div>
+    <div class="title" [innerHTML]="banner.title"></div>
+    <div class="additional-text" [innerHTML]="banner.additionalText"></div>
+    <div class="additional-lower-space" *ngIf="banner.additionalLowerSpace"></div>
+    <button class="button">Подробнее</button>
+  </div>
+</div>

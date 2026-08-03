@@ -11,7 +11,7 @@ export class MainComponent {
 
   banners = [
     {
-      image: 'assets/images/banner/Image(1).png',
+      image: 'assets/images/big-banner/Image(1).png',
       additionalUpperSpace: true,
       categoryTitle: 'Предложение месяца',
       title: 'Продвижение в<br>Instagram для вашего<br>бизнеса <span>-15%</span>!',
@@ -19,7 +19,7 @@ export class MainComponent {
       additionalLowerSpace: false,
     },
     {
-      image: 'assets/images/banner/Image(2).png',
+      image: 'assets/images/big-banner/Image(2).png',
       additionalUpperSpace: false,
       categoryTitle: 'Акция',
       title: 'Нужен грамотный<br><span>копирайтер</span>?',
@@ -27,7 +27,7 @@ export class MainComponent {
       additionalLowerSpace: true,
     },
     {
-      image: 'assets/images/banner/Image(3).png',
+      image: 'assets/images/big-banner/Image(3).png',
       additionalUpperSpace: false,
       categoryTitle: 'Новость дня',
       title: '<span>6 место</span> в ТОП-10<br>SMM-агенств Москвы!',

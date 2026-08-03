@@ -4,17 +4,7 @@
     <div class="chapter chapter-banner" *ngIf="banners && banners.length > 0">
       <owl-carousel-o [options]="bannersOwlOptions" #owlBannerCar>
         <ng-template carouselSlide *ngFor="let banner of banners">
-          <div class="banner" [style.background-image]="'url(\'' + banner.image + '\')'">
-            <div class="banner-eclipse"></div>
-            <div class="banner-content">
-              <div class="additional-upper-space" *ngIf="banner.additionalUpperSpace"></div>
-              <div class="category-title additional-margin">{{ banner.categoryTitle }}</div>
-              <div class="title" [innerHTML]="banner.title"></div>
-              <div class="additional-text" [innerHTML]="banner.additionalText"></div>
-              <div class="additional-lower-space" *ngIf="banner.additionalLowerSpace"></div>
-              <button class="button">Подробнее</button>
-            </div>
-          </div>
+          <big-banner [banner]="banner"></big-banner>
         </ng-template>
         <div class="owl-dots">
           <div class="owl-dot active"><span></span></div>
@@ -24,9 +14,9 @@
       </owl-carousel-o>
 
       <div class="banner-arrows">
-        <div class="move-backward" style="background-image: url('assets/images/banner/Previous.png')"
+        <div class="move-backward" style="background-image: url('../../../assets/images/big-banner/Previous.png')"
              (click)="owlBannerCar.prev()"></div>
-        <div class="move-forward" style="background-image: url('assets/images/banner/Next.png')"
+        <div class="move-forward" style="background-image: url('../../../assets/images/big-banner/Next.png')"
              (click)="owlBannerCar.next()"></div>
       </div>
     </div>
