@@ -76,62 +76,10 @@
     </div>
 
     <!--    #PART CHAPTER ---------- 4  -->
-    <div class="chapter chapter-popular">
+    <div class="chapter chapter-popular" *ngIf="popularArticles">
       <div class="chapter-title chapter-title--popular">Популярные статьи из блога</div>
       <div class="pseudo-carousel">
-        <div class="popular-card">
-          <div class="card-image"
-               style="background-image: url('assets/images/popular-cards/Rectangle 103(1).png')"></div>
-          <div class="card-title">6 сайтов для повышения продуктивности</div>
-          <div class="card-description">
-            Хотите проводить время в сети с пользой? Наша подборка из шести полезных, но малоизвестных сайтов увеличит
-            вашу продуктивность, поможет успевать больше в течение дня и всегда быть на шаг впереди!
-          </div>
-          <div class="card-footer">
-            <a href="#" class="link-to-article">Читать дальше</a>
-          </div>
-          <div class="category-absolute-label">Фриланс</div>
-        </div>
-        <div class="popular-card">
-          <div class="card-image"
-               style="background-image: url('assets/images/popular-cards/Rectangle 103(2).png')"></div>
-          <div class="card-title">Как произвести впечатление на нового клиента?</div>
-          <div class="card-description">
-            Поиск новых клиентов — это сложная задача не только для новичков, но и для опытных специалистов. Мы
-            расскажем, как справиться с волнением, завоевать доверие клиента и произвести на него потрясающее первое
-            впечатление.
-          </div>
-          <div class="card-footer">
-            <a href="#" class="link-to-article">Читать дальше</a>
-          </div>
-          <div class="category-absolute-label">Таргет</div>
-        </div>
-        <div class="popular-card">
-          <div class="card-image"
-               style="background-image: url('assets/images/popular-cards/Rectangle 103(3).png')"></div>
-          <div class="card-title">Как бороться с конкуренцией на фрилансе?</div>
-          <div class="card-description">
-            Конкуренция — это часть нашей жизни. Мы боремся за место работы, за победу на конкурсе и даже за возможность
-            купить последний круассан в любимом кафе. Фриланс не исключение.
-          </div>
-          <div class="card-footer">
-            <a href="#" class="link-to-article">Читать дальше</a>
-          </div>
-          <div class="category-absolute-label">Фриланс</div>
-        </div>
-        <div class="popular-card">
-          <div class="card-image"
-               style="background-image: url('assets/images/popular-cards/Rectangle 103(4).png')"></div>
-          <div class="card-title">SMM-специалисты: кто они?</div>
-          <div class="card-description">
-            Профессия SММ-менеджера набирает все большую популярность. В эпоху интернета уже не только новости –
-            приобретение товаров и услуг уходит в онлайн, а просмотр любимых сайтов становится ежедневной рутиной.
-          </div>
-          <div class="card-footer">
-            <a href="#" class="link-to-article">Читать дальше</a>
-          </div>
-          <div class="category-absolute-label">SMM</div>
-        </div>
+        <article-card [article]="article" *ngFor="let article of popularArticles"></article-card>
       </div>
       <div class="popular-footer">
         <a href="" class="link-to-blog">

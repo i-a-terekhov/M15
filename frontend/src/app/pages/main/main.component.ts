@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { environment } from "../../../environments/environment";
 import { OwlOptions } from "ngx-owl-carousel-o";
+import { ArticlesService } from "../../shared/services/articles.service";
+import { ArticlesType, ArticleType } from "../../../types/articlesType";
 
 @Component({
   selector: 'app-main',
@@ -90,6 +92,8 @@ export class MainComponent {
     },
   ]
 
+  popularArticles: ArticleType[] = [];
+
   reviews = [
     {
       image: 'assets/images/reviews-cards/review-01.png',
@@ -147,4 +151,14 @@ export class MainComponent {
     },
     nav: false
   };
+
+  constructor(private articlesService: ArticlesService) {
+  }
+
+  ngOnInit() {
+    this.articlesService.getPopularArticles()
+      .subscribe((data: ArticleType[]) => {
+        this.popularArticles = data;
+    })
+  }
 }
