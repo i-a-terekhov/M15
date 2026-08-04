@@ -28,11 +28,12 @@
         <svg width="24" height="24">
           <use href="../../../assets/icons/icons.svg#user-icon"></use>
         </svg>
-        <span>ВОЙДЕНО, ЮЗЕРНЕЙМ С БЕКЕНДА</span>
+        <span *ngIf="userName">Привет, {{ userName }}!</span>
+        <span *ngIf="!userName">Привет!</span>
       </a>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <span (click)="logout()">Выйти</span>
+        <button mat-menu-item (click)="logout()">
+          <span>Выйти</span>
         </button>
       </mat-menu>
     </div>

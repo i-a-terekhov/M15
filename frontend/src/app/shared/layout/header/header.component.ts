@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { AuthService } from "../../../core/auth/auth.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import { UserService } from "../../services/user.service";
+import { DefaultResponseType } from "../../../../types/default-response.type";
+import { UserInfoType } from "../../../../types/user-info.type";
 
 @Component({
   selector: 'app-header',
@@ -17,6 +20,7 @@ export class HeaderComponent {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router,
+    private userService: UserService,
   ) {
     this.isLoggedIn = authService.getIsLoggedIn();
   }
@@ -25,11 +29,25 @@ export class HeaderComponent {
     this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
       this.isLoggedIn = isLoggedIn;
       if (this.isLoggedIn) {
-        // запрос на получение имени юзера
+        this.getUserName();
       }
     });
+
+    if (this.isLoggedIn) {
+      this.getUserName();
+    }
   }
 
+  getUserName() {
+    this.userService.getUserInfo()
+      .subscribe((data: DefaultResponseType | UserInfoType) => {
+        if ('error' in data) {
+          throw new Error(data.message);
+        } else {
+          this.userName = data.name;
+        }
+      });
+  }
 
   logout(): void {
     this.authService.logout()
@@ -46,6 +64,8 @@ export class HeaderComponent {
   doLogout(): void {
     this.authService.removeTokens();
     this.authService.userId = null;
+    this.isLoggedIn = false;
+    this.userName = '';
     this.snackBar.open('Вы вышли из системы');
     this.router.navigate(['/']);
   }
