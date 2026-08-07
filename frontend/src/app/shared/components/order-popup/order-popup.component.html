@@ -1,0 +1,40 @@
+<div class="order-popup" [formGroup]="orderForm" *ngIf="isVisible">
+  <div class="shadow-layout" (click)="closePopup()"></div>
+  <div class="order-form">
+    <div class="form-title">
+      Заявка на услугу
+    </div>
+    <div class="form-inputs">
+      <mat-form-field class="form-input-material" [class.invalid-field]="isFieldInvalid('service')">
+        <mat-select formControlName="service">
+          <mat-option *ngFor="let service of servicesList" [value]="service">{{ service }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <input type="text" class="form-input"
+             [ngStyle]="{'border-color': isFieldInvalid('name') ? 'red' : ''}"
+             placeholder="Ваше имя" formControlName="name">
+      <input type="tel" class="form-input"
+             [ngStyle]="{'border-color': isFieldInvalid('phone') ? 'red' : ''}"
+             placeholder="Ваш номер телефона" formControlName="phone">
+    </div>
+    <div class="form-button-area">
+      <button class="form-button" [disabled]="isFormValid()" (click)="orderRequest()">
+        Оставить заявку
+      </button>
+      <span *ngIf="isFormValid()" class="form-button-error">
+        Заполните все поля формы!
+      </span>
+      <span *ngIf="isRequestError" class="form-request-error">
+        Ошибка при отправке формы. Попробуйте еще раз
+      </span>
+    </div>
+
+    <button class="close-absolute-button" (click)="closePopup()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="1.93562" y1="2.64999" x2="13.9564" y2="14.6708" stroke="#BEBEBE" stroke-linecap="round"/>
+        <line x1="13.9236" y1="2.62978" x2="1.90277" y2="14.6506" stroke="#BEBEBE" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</div>

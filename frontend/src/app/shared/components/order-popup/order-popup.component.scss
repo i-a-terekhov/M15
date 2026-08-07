@@ -1,0 +1,183 @@
+@import "../../../../assets/styles/variables";
+
+.order-popup {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+
+  .shadow-layout {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .order-form {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    width: 727px;
+    height: 489px;
+    background: #FFFFFF;
+    border: 1.5px solid $usual-blue-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .form-title {
+      font-family: 'Lora', serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 38px;
+      line-height: 130%;
+      color: $usual-blue-color;
+    }
+
+    .form-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 422px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      .form-input {
+        box-sizing: border-box;
+        padding: 20px 64px 20px 20px;
+        height: 53px;
+        background: #FFFFFF;
+        border: 1.5px solid $usual-blue-color;
+        border-radius: 3px;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 130%;
+        color: $usual-blue-color;
+
+        &::placeholder {
+          color: #A8ABA7;
+        }
+      }
+    }
+
+    .form-button-area {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .form-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 40px;
+        width: 422px;
+        height: 51px;
+        left: 152px;
+        background: $usual-blue-color;
+        border-radius: 5px;
+        border: 1px solid transparent;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 130%;
+        color: #FFFFFF;
+        cursor: pointer;
+        transition: 0.1s;
+
+        &:hover {
+          background: $hover-blue-color;
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+
+        &:disabled {
+          background-color: $button-disable-color;
+          color: rgba(255, 255, 255, 0.6);
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      }
+
+      .form-button-error,
+      .form-request-error {
+        color: $error-color;
+        position: absolute;
+        bottom: -28px;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 130%;
+      }
+    }
+
+    .close-absolute-button {
+      background: transparent;
+      border: none;
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      cursor: pointer;
+    }
+
+    .form-input-material {
+      width: 100%;
+
+      // структурные элементы material, ломающие верстку
+      ::ng-deep {
+        .mdc-notched-outline,
+        .mat-mdc-form-field-focus-overlay,
+        .mat-mdc-form-field-subscript-wrapper {
+          display: none !important;
+        }
+      }
+
+      // заменяем стили инпута своими значениями
+      ::ng-deep .mat-mdc-text-field-wrapper {
+        box-sizing: border-box !important;
+        padding: 0 15px 0 20px !important;
+        height: 53px !important;
+        background: #FFFFFF !important;
+        border: 1.5px solid $usual-blue-color !important;
+        border-radius: 3px !important;
+        display: flex !important;
+        align-items: center !important;
+        --mdc-filled-text-field-active-indicator-height: 0px !important; // нижняя граница при фокусе
+        --mdc-filled-text-field-focus-active-indicator-height: 0px !important; // нижняя граница при активном элементе
+
+        &:hover {
+          --mdc-filled-text-field-active-indicator-height: 0px !important;
+        }
+      }
+
+      ::ng-deep {
+        // Текст выбранного значения
+        .mat-mdc-select-value {
+          font-style: normal !important;
+          font-size: 14px !important;
+          line-height: 130% !important;
+          color: $usual-blue-color !important;
+        }
+
+        .mat-mdc-select-arrow svg {
+          fill: $usual-blue-color !important;
+        }
+      }
+
+      // окрашивание рамки и текста при ошибке
+      &.invalid-field {
+        ::ng-deep .mat-mdc-text-field-wrapper {
+          border-color: red !important;
+        }
+
+        ::ng-deep .mat-mdc-select-arrow svg {
+          fill: red !important;
+        }
+      }
+    }
+  }
+}
