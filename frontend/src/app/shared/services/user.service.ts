@@ -14,6 +14,6 @@ export class UserService {
   }
 
   getUserInfo(): Observable<DefaultResponseType | UserInfoType> {
-    return this.http.get<DefaultResponseType>(`${environment.api}users`);
+    return this.http.get<DefaultResponseType | UserInfoType>(`${environment.api}users`);
   }
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PopupService } from "../../services/popup.service";
+import { PopupEnumType } from "../../../../types/popup-enum.type";
 
 @Component({
   selector: 'app-footer',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  constructor(private popupService: PopupService) {
+  }
+
+  sendConsultRequest() {
+    this.popupService.dataSender('Консультация', PopupEnumType.consultation)
+  }
 }

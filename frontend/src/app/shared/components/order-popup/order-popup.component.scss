@@ -1,6 +1,7 @@
 @import "../../../../assets/styles/variables";
 
-.order-popup {
+.popup-screen,
+.popup-thanks-screen {
   position: fixed;
   z-index: 99;
   top: 0;
@@ -12,7 +13,7 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  .order-form {
+  .popup {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -28,13 +29,23 @@
     justify-content: center;
     align-items: center;
 
-    .form-title {
+    .popup-title {
       font-family: 'Lora', serif;
       font-style: normal;
       font-weight: 400;
       font-size: 38px;
       line-height: 130%;
       color: $usual-blue-color;
+    }
+
+    .description {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 130%;
+      color: $dark-violent-color;
+      margin-top: 20px;
+      margin-bottom: 40px;
     }
 
     .form-inputs {
@@ -112,6 +123,28 @@
         font-style: normal;
         font-size: 14px;
         line-height: 130%;
+      }
+    }
+
+    .thanks-button {
+      padding: 10px 20px;
+      width: 74px;
+      height: 36px;
+      background: $usual-blue-color;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 130%;
+      color: #FFFFFF;
+
+      &:hover {
+        background: $hover-blue-color;
+      }
+
+      &:active {
+        transform: scale(0.95);
       }
     }
 

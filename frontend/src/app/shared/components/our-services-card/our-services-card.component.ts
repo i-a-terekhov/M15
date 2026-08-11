@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { OurServiceType } from "../../../../types/our-service.type";
+import { PopupService } from "../../services/popup.service";
 
 @Component({
   selector: 'our-services-card',
@@ -10,6 +11,10 @@ export class OurServicesCardComponent {
 
   @Input() ourService!: OurServiceType;
 
-  constructor() {
+  constructor(private popupService: PopupService) {
+  }
+
+  sendServiceName() {
+    this.popupService.dataSender(this.ourService.nameOfServiceCategory)
   }
 }

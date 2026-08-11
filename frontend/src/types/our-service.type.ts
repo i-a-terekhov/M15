@@ -1,6 +1,7 @@
 export type OurServiceType = {
-    image: string,
-    title: string,
-    description: string,
-    priceDescription: string,
+  image: string,
+  title: string,
+  description: string,
+  priceDescription: string,
+  nameOfServiceCategory: string,
 }

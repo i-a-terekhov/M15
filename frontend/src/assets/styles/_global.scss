@@ -37,3 +37,8 @@ html, body {
 .mat-progress-spinner circle, mat-spinner circle {  // этот блок для кольцевого лоадера
   stroke: $hover-blue-color;
 }
+
+// Запрещаем браузеру дергать скролл, когда mat-select получает фокус
+:host ::ng-deep .mat-mdc-select:focus-visible {
+  scroll-margin-top: 50vh; // заставляет браузер думать, что элемент уже в центре
+}

@@ -1,11 +1,15 @@
-<div class="order-popup" [formGroup]="orderForm" *ngIf="isVisible">
+<div class="popup-screen" [hidden]="!isVisible">
   <div class="shadow-layout" (click)="closePopup()"></div>
-  <div class="order-form">
-    <div class="form-title">
+  <form class="popup" [formGroup]="orderForm" (ngSubmit)="orderRequest()">
+    <div class="popup-title" *ngIf="popupType===popupTypes.order">
       Заявка на услугу
     </div>
+    <div class="popup-title" *ngIf="popupType===popupTypes.consultation">
+      Закажите бесплатную<br>консультацию!
+    </div>
     <div class="form-inputs">
-      <mat-form-field class="form-input-material" [class.invalid-field]="isFieldInvalid('service')">
+      <mat-form-field *ngIf="popupType===popupTypes.order" class="form-input-material"
+                      [class.invalid-field]="isFieldInvalid('service')">
         <mat-select formControlName="service">
           <mat-option *ngFor="let service of servicesList" [value]="service">{{ service }}</mat-option>
         </mat-select>
@@ -19,8 +23,9 @@
              placeholder="Ваш номер телефона" formControlName="phone">
     </div>
     <div class="form-button-area">
-      <button class="form-button" [disabled]="isFormValid()" (click)="orderRequest()">
-        Оставить заявку
+      <button class="form-button" [disabled]="isFormValid()">
+        <span *ngIf="popupType===popupTypes.order">Оставить заявку</span>
+        <span *ngIf="popupType===popupTypes.consultation">Заказать консультацию</span>
       </button>
       <span *ngIf="isFormValid()" class="form-button-error">
         Заполните все поля формы!
@@ -30,7 +35,27 @@
       </span>
     </div>
 
-    <button class="close-absolute-button" (click)="closePopup()">
+    <button class="close-absolute-button" type="button" (click)="closePopup()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="1.93562" y1="2.64999" x2="13.9564" y2="14.6708" stroke="#BEBEBE" stroke-linecap="round"/>
+        <line x1="13.9236" y1="2.62978" x2="1.90277" y2="14.6506" stroke="#BEBEBE" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </form>
+</div>
+
+<div class="popup-thanks-screen" [hidden]="!isThanksVisible">
+  <div class="shadow-layout" (click)="closeThanks()"></div>
+  <div class="popup">
+    <div class="popup-title">
+      Спасибо за вашу заявку!
+    </div>
+    <div class="description">
+      Мы свяжемся с вами при первой же возможности.
+    </div>
+    <button class="thanks-button" type="button" (click)="closeThanks()">Окей</button>
+
+    <button class="close-absolute-button" type="button" (click)="closeThanks()">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line x1="1.93562" y1="2.64999" x2="13.9564" y2="14.6708" stroke="#BEBEBE" stroke-linecap="round"/>
         <line x1="13.9236" y1="2.62978" x2="1.90277" y2="14.6506" stroke="#BEBEBE" stroke-linecap="round"/>

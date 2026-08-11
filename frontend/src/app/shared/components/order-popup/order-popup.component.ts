@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from "@angular/forms";
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroupDirective, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { PopupService } from "../../services/popup.service";
+import { CategoriesService } from "../../services/categories.service";
+import { RequestBodyType } from "../../../../types/request-body.type";
+import { RequestService } from "../../services/request.service";
+import { PopupEnumType } from "../../../../types/popup-enum.type";
 
 @Component({
   selector: 'order-popup',
@@ -9,16 +14,17 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class OrderPopupComponent {
 
-  isVisible = true;
-  servicesList: string[] = [
-    '',
-    'Разработка сайта',
-    'Дизайн интерфейсов',
-    'Маркетинговое продвижение',
-    'Техническая поддержка'
-  ];  // #TODO реализовать через запрос на сервер
+  @ViewChild(FormGroupDirective) formDirective!: FormGroupDirective;
+
+  popupTypes = PopupEnumType;
+  popupType: PopupEnumType = this.popupTypes.order;
+  isVisible = false;
+  isThanksVisible = false;
+
+  servicesList: string[] = [];
   isSubmitted = false; // для перевода кнопки в disable после первого нажатия (в сценарии, когда форма не тронута)
   isRequestError = false;
+  makeErrorRequest = false; // если из карточки пришло название услуги не из списка сервера, намеренно отправляем кривой запрос (для демонстрации функционала показа предупреждающей надписи в попапе)
 
   orderForm = this.fb.group({
     service: ['', [Validators.required]],
@@ -27,8 +33,51 @@ export class OrderPopupComponent {
   });
 
   constructor(private fb: FormBuilder,
+              private popupService: PopupService,
+              private categoryService: CategoriesService,
+              private requestService: RequestService,
               private snackBar: MatSnackBar,
-              ) {
+  ) {
+  }
+
+  ngOnInit() {
+    this.popupService.popupDataSource$.subscribe(
+      ({ selectedOptionName, popupType }) => {
+        this.popupType = popupType;
+        const currentScrollY = window.scrollY;   // запоминаем положение страницы при вызове попапа
+
+        this.isRequestError = false;
+        if (this.servicesList && this.servicesList.length === 0) {
+          this.snackBar.open('Медленное соединение! Попробуйте позже')
+          return;
+        }
+
+        this.isVisible = true;       // т.к. Material перехватывает фокус на инпут и из-за кастомного попапа скроллит нас
+        setTimeout(() => {  // в центр страницы, перехватываем скролл сразу после Material
+          window.scrollTo({
+            top: currentScrollY,
+            behavior: 'auto'
+          });
+        }, 15);
+
+        if (this.popupType === this.popupTypes.order) {
+          if (this.servicesList.includes(selectedOptionName)) {
+            this.orderForm.get('service')?.patchValue(selectedOptionName);
+          } else {
+            this.servicesList.push(selectedOptionName);
+            this.makeErrorRequest = true;
+            this.orderForm.get('service')?.patchValue(selectedOptionName);
+          }
+        } else {
+          this.orderForm.get('service')?.patchValue(selectedOptionName);  // "Консультация"
+        }
+      });
+
+    this.categoryService.categories$.subscribe((categories: string[]) => {
+      if (categories && categories.length > 0) {
+        this.servicesList = categories;
+      }
+    })
   }
 
   isFieldInvalid(fieldName: string): boolean {
@@ -48,12 +97,38 @@ export class OrderPopupComponent {
       return;
     }
 
-    console.log('orderRequest');
-    // запрос на сервер
+    const body: RequestBodyType = {
+      name: this.orderForm.value.name!,
+      phone: this.orderForm.value.phone!,
+      service: this.orderForm.value.service!,
+      type: this.makeErrorRequest ? "errorOrder" : this.popupType,
+    }
+
+    this.requestService.getPopularArticles(body).subscribe({
+      next: () => {
+        this.isThanksVisible = true;
+        this.fullFormReset();
+      },
+      error: err => {
+        console.error(err.error.message);
+        this.isRequestError = true;
+        this.makeErrorRequest = false;
+      },
+    });
   }
 
   closePopup(): void {
-    this.orderForm.reset();
+    this.fullFormReset();
+  }
+
+  fullFormReset(): void {
+    this.formDirective.resetForm();
     this.isVisible = false;
+    this.isSubmitted = false;
+    this.makeErrorRequest = false;
+  }
+
+  closeThanks(): void {
+    this.isThanksVisible = false;
   }
 }

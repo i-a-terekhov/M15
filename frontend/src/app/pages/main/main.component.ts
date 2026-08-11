@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { environment } from "../../../environments/environment";
 import { OwlOptions } from "ngx-owl-carousel-o";
 import { ArticlesService } from "../../shared/services/articles.service";
-import { ArticlesType, ArticleType } from "../../../types/articlesType";
+import { ArticlesType, ArticleType } from "../../../types/articles.type";
 
 @Component({
   selector: 'app-main',
@@ -71,24 +71,28 @@ export class MainComponent {
       title: 'Создание сайтов',
       description: 'В краткие сроки мы создадим качественный и самое главное продающий сайт для продвижения Вашего бизнеса!',
       priceDescription: 'От 7 500₽',
+      nameOfServiceCategory: "Создание сайтов",  // заведомо несуществующая на бэкенде категория (для демонстрации ошибки)
     },
     {
       image: 'assets/images/service-cards/Rectangle 103(2).png',
       title: 'Продвижение',
       description: 'Вам нужен качественный SMM-специалист или грамотный таргетолог? Мы готовы оказать Вам услугу “Продвижения” на наивысшем уровне!',
       priceDescription: 'От 3 500₽',
+      nameOfServiceCategory: "SMM",
     },
     {
       image: 'assets/images/service-cards/Rectangle 103(3).png',
       title: 'Реклама',
       description: 'Без рекламы не может обойтись ни один бизнес или специалист. Обращаясь к нам, мы гарантируем быстрый прирост клиентов за счёт правильно настроенной рекламы.',
       priceDescription: 'От 1 000₽',
+      nameOfServiceCategory: "Таргет",
     },
     {
       image: 'assets/images/service-cards/Rectangle 103(4).png',
       title: 'Копирайтинг',
       description: 'Наши копирайтеры готовы написать Вам любые продающие текста, которые не только обеспечат рост охватов, но и помогут выйти на новый уровень в продажах.',
       priceDescription: 'От 750₽',
+      nameOfServiceCategory: "Копирайтинг",
     },
   ]
 

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ArticleType } from "../../../../types/articlesType";
+import { ArticleType } from "../../../../types/articles.type";
 import { environment } from "../../../../environments/environment";
 
 @Component({
