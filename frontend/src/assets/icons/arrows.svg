@@ -6,4 +6,33 @@
       fill="#709FDC"/>
   </symbol>
 
+  <symbol id="label-cross" viewBox="0 0 16 16" fill="none">
+    <svg width="16" height="16">
+      <g clip-path="url(#clip0_26933_451)">
+        <line x1="1.93553" y1="2.65002" x2="13.9563" y2="14.6708" stroke="#709FDC" stroke-linecap="round"/>
+        <line x1="13.9236" y1="2.62984" x2="1.90278" y2="14.6507" stroke="#709FDC" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </symbol>
+
+  <symbol id="pagination-arrow-left-disabled" viewBox="0 0 24 24">
+    <path fill="#D9D9D9"
+          d="M12.727 3.687a1 1 0 1 0-1.454-1.374l-8.5 9a1 1 0 0 0 0 1.374l8.5 9.001a1 1 0 1 0 1.454-1.373L4.875 12z"/>
+  </symbol>
+
+  <symbol id="pagination-arrow-left-active" viewBox="0 0 24 24">
+    <path fill="#B9D5FD"
+          d="M12.727 3.687a1 1 0 1 0-1.454-1.374l-8.5 9a1 1 0 0 0 0 1.374l8.5 9.001a1 1 0 1 0 1.454-1.373L4.875 12z"/>
+  </symbol>
+
+  <symbol id="pagination-arrow-right-disabled" viewBox="0 0 24 24">
+    <path fill="#D9D9D9"
+          d="M11.273 3.687a1 1 0 1 1 1.454-1.374l8.5 9a1 1 0 0 1 0 1.374l-8.5 9.001a1 1 0 1 1-1.454-1.373L19.125 12z"/>
+  </symbol>
+
+  <symbol id="pagination-arrow-right-active" viewBox="0 0 24 24">
+    <path fill="#B9D5FD"
+          d="M11.273 3.687a1 1 0 1 1 1.454-1.374l8.5 9a1 1 0 0 1 0 1.374l-8.5 9.001a1 1 0 1 1-1.454-1.373L19.125 12z"/>
+  </symbol>
+
 </svg>

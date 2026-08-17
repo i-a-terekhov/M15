@@ -14,6 +14,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { CarouselModule } from "ngx-owl-carousel-o";
 import { AuthInterceptor } from "./core/auth/auth.interceptor";
 import { SharedModule } from "./shared/shared.module";
+import { BlogComponent } from './pages/blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SharedModule } from "./shared/shared.module";
     FooterComponent,
     HeaderComponent,
     MainComponent,
+    BlogComponent,
   ],
   imports: [
     BrowserModule,
