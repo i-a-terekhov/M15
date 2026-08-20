@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { ArticlesType, ArticleType } from "../../../types/articles.type";
+import { ActiveQueryParamsType } from "../../../types/active-query-params.type";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class ArticlesService {
 
   getPopularArticles(): Observable<ArticleType[]> {
     return this.http.get<ArticleType[]>(`${environment.api}articles/top`);
+  }
+
+  getArticlesWithFilter(params: ActiveQueryParamsType): Observable<ArticlesType> {
+    return this.http.get<ArticlesType>(`${environment.api}articles`, { params });
   }
 }

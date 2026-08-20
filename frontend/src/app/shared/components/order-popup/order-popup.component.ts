@@ -73,7 +73,7 @@ export class OrderPopupComponent {
         }
       });
 
-    this.categoryService.categories$.subscribe((categories: string[]) => {
+    this.categoryService.categoriesNames$.subscribe((categories: string[]) => {
       if (categories && categories.length > 0) {
         this.servicesList = categories;
       }

@@ -5,34 +5,41 @@
 
       <div class="chapter-filter-bar">
         <div class="labels-area">
-          <div class="filter-bar-label">
-            <span class="label-name">Дизайн</span>
-            <svg width="16" height="16">
-              <use href="../../assets/icons/arrows.svg#label-cross"></use>
-            </svg>
-          </div>
-          <div class="filter-bar-label">
-            <span class="label-name">Дизайн</span>
-            <svg width="16" height="16">
-              <use href="../../assets/icons/arrows.svg#label-cross"></use>
-            </svg>
-          </div>
-          <div class="filter-bar-label">
-            <span class="label-name">Дизайн</span>
-            <svg width="16" height="16">
+          <div class="filter-bar-label" *ngFor="let item of categoriesSetInFilter">
+            <span class="label-name">{{ item.name }}</span>
+            <svg width="16" height="16" (click)="toggleItem(item)">
               <use href="../../assets/icons/arrows.svg#label-cross"></use>
             </svg>
           </div>
         </div>
-        <div class="drop-down-area">
-          <div class="drop-down-menu">
-            <span class="drop-down-title">Фильтр</span>
+        <div class="dropdown-area">
+          <button class="dropdown-button" (click)="toggleDropdown()" [class.open]="isDropdownMenuOpen">
+            <span class="dropdown-title">Фильтр</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M10 14C9.41668 14 8.83335 13.775 8.39168 13.3334L2.95835 7.90003C2.71668 7.65837 2.71668 7.25837 2.95835 7.0167C3.20002 6.77503 3.60002 6.77503 3.84168 7.0167L9.27502 12.45C9.67502 12.85 10.325 12.85 10.725 12.45L16.1583 7.0167C16.4 6.77503 16.8 6.77503 17.0417 7.0167C17.2833 7.25837 17.2833 7.65837 17.0417 7.90003L11.6083 13.3334C11.1667 13.775 10.5833 14 10 14Z"
                 fill="#071739"/>
             </svg>
-          </div>
+          </button>
+          <ul class="dropdown-menu" *ngIf="isDropdownMenuOpen">
+            <li
+              *ngFor="let item of categoriesFromServer"
+              class="dropdown-item"
+              [ngClass]="{ 'is-selected': item.selected }"
+              (click)="toggleItem(item)">
+              {{ item.name }}
+              <svg *ngIf="!item.selected" width="11" height="11" viewBox="0 0 11 11" fill="none"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M10.4399 4.39198H5.97595V-2.47955e-05H4.46395V4.39198H-5.37038e-05V5.80798H4.46395V10.176H5.97595V5.80798H10.4399V4.39198Z"
+                  fill="#BEBEBE"/>
+              </svg>
+              <svg *ngIf="item.selected" style="margin-right: 2px" width="7" height="2" viewBox="0 0 7 2" fill="none"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.8651e-05 1.48799H6.28806V-1.45435e-05H5.8651e-05V1.48799Z" fill="#071739"/>
+              </svg>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -47,23 +54,25 @@
             <use href="../../assets/icons/arrows.svg#pagination-arrow-left-disabled"></use>
           </svg>
         </div>
-        <button class="pg-btn pg-button-prev" *ngIf="ifPrevArrowAllowed">
+        <button class="pg-btn pg-button-prev" *ngIf="ifPrevArrowAllowed" (click)="arrowButtonHandler('prev')">
           <svg width="100%" height="100%">
             <use href="../../assets/icons/arrows.svg#pagination-arrow-left-active"></use>
           </svg>
         </button>
 
-        <button class="pg-btn pg-button-digit" [class.active]="(page + 1 === currentPage)"
-                *ngFor="let i of [].constructor(totalAmountOfPages + 3); let page = index;">
+        <button class="pg-btn pg-button-digit" [class.active]="(page + 1 === +(activeQueryParams.page))"
+                *ngFor="let i of [].constructor(totalAmountOfPages); let page = index;"
+                (click)="numberButtonHandler((page + 1))">
           {{ page + 1 }}
         </button>
 
-        <div class="pg-pseudo-btn pg-button-prev" *ngIf="!ifNextArrowAllowed">
+        <div class="pg-pseudo-btn pg-button-next" *ngIf="!ifNextArrowAllowed">
           <svg width="100%" height="100%">
             <use href="../../assets/icons/arrows.svg#pagination-arrow-right-disabled"></use>
           </svg>
         </div>
-        <button class="pg-btn pg-button-prev" *ngIf="ifNextArrowAllowed">
+        <button class="pg-btn pg-button-next" *ngIf="ifNextArrowAllowed"
+                (click)="arrowButtonHandler('next')">
           <svg width="100%" height="100%">
             <use href="../../assets/icons/arrows.svg#pagination-arrow-right-active"></use>
           </svg>
