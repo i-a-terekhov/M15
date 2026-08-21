@@ -5,7 +5,7 @@ import { ActiveQueryParamsType } from "../../../types/active-query-params.type";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { CategoriesService } from "../../shared/services/categories.service";
 import { CategoryType } from "../../../types/categoryRawType";
-import { map, Observable, Subscription, switchMap, tap } from "rxjs";
+import { map, switchMap, tap } from "rxjs";
 
 @Component({
   selector: 'app-blog',
