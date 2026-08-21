@@ -2,9 +2,10 @@ import { Component, HostListener } from '@angular/core';
 import { ArticlesType, ArticleType } from "../../../types/articles.type";
 import { ArticlesService } from "../../shared/services/articles.service";
 import { ActiveQueryParamsType } from "../../../types/active-query-params.type";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { CategoriesService } from "../../shared/services/categories.service";
-import { CategoryInFilterType, CategoryType } from "../../../types/categoryRawType";
+import { CategoryType } from "../../../types/categoryRawType";
+import { map, Observable, Subscription, switchMap, tap } from "rxjs";
 
 @Component({
   selector: 'app-blog',
@@ -13,18 +14,14 @@ import { CategoryInFilterType, CategoryType } from "../../../types/categoryRawTy
 })
 export class BlogComponent {
 
-  activeQueryParams: ActiveQueryParamsType = { page: '1', categories: [] };
+  activeQueryParams: ActiveQueryParamsType = { page: 1, categories: [] };
   categoriesFromServer: CategoryType[] = [];
-  categoriesSetInFilter: CategoryInFilterType[] = [];
 
   isDropdownMenuOpen: boolean = false;
 
   currentArticlesCount: number = 0;
   totalAmountOfPages: number = 1;
   currentArticlesData: ArticleType[] = [];
-
-  ifPrevArrowAllowed: boolean = false;
-  ifNextArrowAllowed: boolean = true;
 
   constructor(private articlesService: ArticlesService,
               private activatedRoute: ActivatedRoute,
@@ -34,127 +31,116 @@ export class BlogComponent {
   }
 
   ngOnInit() {
-    // Подписка на получение имен категорий из QUERY
-    this.activatedRoute.queryParams
-      .subscribe(params => {
-        console.log('обновили url');
-        this.activeQueryParams = { page: '1', categories: [] };
+    this.listenToCategories();
+    this.listenToUrl();
+  }
 
-        if (params.hasOwnProperty("page")) {
-          this.activeQueryParams.page = params['page'];
-        }
-        if (params.hasOwnProperty("categories")) {
-          this.activeQueryParams.categories = typeof params['categories'] === "string"
-            ? [params['categories']]
-            : params['categories'];
-        }
-
-        this.updateFilterCategories();
-        this.loadArticles();
-      });
-
-    // Подписка на получение категорий с сервера (сработает только один раз, т.к. категории меняются не часто и не с этой страницы)
+  private listenToCategories() {
     this.categoryService.categoriesObjects$
       .subscribe((categories: CategoryType[]) => {
-        if (categories && categories.length > 0) {
-          this.categoriesFromServer = categories;
-
-          // На полученные категории проставляем актуальные флаги selected
-          this.categoriesFromServer.forEach((category: CategoryType) => {
-            if (this.activeQueryParams.categories.includes(category.url)) {
-              category.selected = true;
-            }
-          })
-        }
-
-        this.updateFilterCategories();
-        this.loadArticles();
+        this.categoriesFromServer = categories;
       });
   }
 
-  // Если есть новые данные о категориях с сервера, обновляем фильтр
-  updateFilterCategories(): undefined | void {
-    this.categoriesSetInFilter = [];
-    if (!this.categoriesFromServer.length) {
-      return undefined;
-    } else {
-      this.categoriesFromServer.forEach(cat => {
-        if (cat.selected) {
-          this.categoriesSetInFilter.push(cat);
-        }
-      });
-    }
-  }
+  private listenToUrl() {
 
-  // При обновлении количества статей остаемся на той же странице, если такая страница допустима, если нет - идем на 1 страницу
-  loadArticles() {
-    this.articlesService.getArticlesWithFilter(this.activeQueryParams)
-      .subscribe((data: ArticlesType) => {
-        if (data && data.count > 0) {
-          this.currentArticlesCount = data.count;
-          this.totalAmountOfPages = data.pages;
-          this.currentArticlesData = data.items;
-        }
-
-        if (+this.activeQueryParams.page > this.totalAmountOfPages) {
-          this.activeQueryParams.page = '1';
-          this.router.navigate(['blog'], {
-            queryParams: {
-              page: this.activeQueryParams.page,
-              categories: this.activeQueryParams.categories,
-            }
-          });
-        }
-
-        this.ifPrevArrowAllowed = Number(this.activeQueryParams.page) > 1;
-        this.ifNextArrowAllowed = Number(this.activeQueryParams.page) < this.totalAmountOfPages;
+    this.activatedRoute.queryParamMap
+      .pipe(
+        map((params: ParamMap) => {
+          let urlPageNum: number = Number(params.get("page"));
+          return {
+            page: urlPageNum > 1 ? urlPageNum : 1,                             // если в url нет страницы, присваиваем 1
+            categories: params.getAll("categories"),                            // getAll всегда возвращает массив
+          }
+        }),
+        tap((filter: ActiveQueryParamsType) => {
+          this.activeQueryParams = filter;
+        }),
+        switchMap((filter: ActiveQueryParamsType) => {
+          return this.articlesService.getArticlesWithFilter(filter)
+        }),
+      )
+      .subscribe((articlesData: ArticlesType) => {
+        this.processArticlesResponse(articlesData);
       });
   }
 
-  // При клике на плашку выбранной категории или при клике в выпадающем меню, обновляем и плашки и меню
-  toggleItem(item: CategoryInFilterType) {
-    item.selected = !item.selected;
+  processArticlesResponse(articlesData: ArticlesType): void {
+    const positiveNumberOfPages = Math.max(articlesData.pages, 1); // на случай, если сервер может вернуть page = 0
 
-    let curItem = this.categoriesSetInFilter.find(arrItem => arrItem === item)
-    if (curItem) {
-      this.categoriesSetInFilter = this.categoriesSetInFilter.filter(item => item !== curItem);
-    } else {
-      this.categoriesSetInFilter.push(item);
+    if (this.activeQueryParams.page > positiveNumberOfPages) {
+      this.navigateToFilter({
+        page: 1,
+        categories: this.activeQueryParams.categories,
+      });
+
+      return;
     }
 
-    let currentParamsUrls = this.categoriesSetInFilter.map(arrItem => arrItem.url);
-    this.router.navigate(['blog'], {
-      queryParams: {
-        page: this.activeQueryParams.page,
-        categories: currentParamsUrls,
+    this.currentArticlesCount = articlesData.count;
+    this.totalAmountOfPages = positiveNumberOfPages;
+    this.currentArticlesData = articlesData.items;
+  }
+
+  get categoriesInFilter(): CategoryType[] {                                                  // для отображения плашек
+    let categoriesSetInFilter: CategoryType[] = [];
+    this.activeQueryParams.categories.forEach(categoryUrl => {
+        let curCat = this.categoriesFromServer.find(cat => cat.url === categoryUrl)
+        if (curCat) {
+          categoriesSetInFilter.push(curCat);
+        }
       }
-    });
+    )
+    return categoriesSetInFilter;
   }
 
-  arrowButtonHandler(value: 'next' | 'prev') {
+  isCategorySelected(category: CategoryType) {                                         // для пометки в элементе менюшки
+    return this.activeQueryParams.categories.includes(category.url);
+  }
+
+  get canGoToPreviousPage() {                                             // чтобы повесить [disabled] на кнопку "назад"
+    return this.activeQueryParams.page > 1;
+  }
+
+  get canGoToNextPage() {                                                // чтобы повесить [disabled] на кнопку "вперед"
+    return this.activeQueryParams.page < this.totalAmountOfPages;
+  }
+
+  paginationHandler(value: 'next' | 'prev' | number) {
+    let filter: ActiveQueryParamsType = { page: 1, categories: this.activeQueryParams.categories };
+
+    if (typeof value === "number") {
+      filter.page = value;
+    }
     if (value === 'prev') {
-      this.activeQueryParams.page = String(Number(this.activeQueryParams.page) - 1);
+      filter.page = this.activeQueryParams.page - 1;
     }
     if (value === 'next') {
-      this.activeQueryParams.page = String(Number(this.activeQueryParams.page) + 1);
+      filter.page = this.activeQueryParams.page + 1;
     }
-    this.router.navigate(['blog'], {
+
+    this.navigateToFilter(filter);
+  }
+
+  private navigateToFilter(filter: ActiveQueryParamsType) {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
       queryParams: {
-        page: this.activeQueryParams.page,
-        categories: this.activeQueryParams.categories,
+        page: filter.page,
+        categories: filter.categories,
       }
     });
   }
 
-  numberButtonHandler(number: number) {
-    console.log('number button clicked:', number);
-    this.activeQueryParams.page = String(number);
-    this.router.navigate(['blog'], {
-      queryParams: {
-        page: this.activeQueryParams.page,
-        categories: this.activeQueryParams.categories,
-      }
-    });
+  toggleItem(category: CategoryType) {
+    let curCategories = this.activeQueryParams.categories;
+
+    if (curCategories.includes(category.url)) {
+      this.activeQueryParams.categories = curCategories.filter((catUrl) => catUrl !== category.url)
+    } else {
+      this.activeQueryParams.categories = [...curCategories, category.url];  // не делаем push, т.к. в этом случае ссылка на activeQueryParams не меняется (Ангуляр не видит изменения)
+    }
+    this.navigateToFilter(this.activeQueryParams);
   }
 
   toggleDropdown() {

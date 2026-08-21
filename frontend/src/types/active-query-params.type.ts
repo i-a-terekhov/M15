@@ -1,4 +1,4 @@
 export type ActiveQueryParamsType = {
-  page: string,
+  page: number,
   categories: string[],
 }

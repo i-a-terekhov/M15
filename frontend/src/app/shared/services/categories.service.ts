@@ -24,7 +24,7 @@ export class CategoriesService {
           if ('error' in data) {
             throw new Error(data.message);
           }
-          return data.length > 0 ? data.map(cat => cat.name) : [];
+          return data.map(cat => cat.name);
         })
       );
   }
@@ -36,7 +36,7 @@ export class CategoriesService {
         if ('error' in data) {
           throw new Error(data.message);
         }
-        return data.length > 0 ? data.map(cat => ({name: cat.name, url: cat.url, selected: false})) : [];
+        return data.map(cat => ({name: cat.name, url: cat.url}));
       })
     )
   }

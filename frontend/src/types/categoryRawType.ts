@@ -7,11 +7,11 @@ export type CategoryRawType = {
 export type CategoryType = {
   name: string,
   url: string,
-  selected: boolean,
 }
 
 export type CategoryInFilterType = {
-  name: string,
-  url: string,
-  selected: boolean,
+  // name: string,
+  // url: string,
+  // selected: boolean,
+  deleted: "УДОЛИ ЭТОТ ТИП",
 }
