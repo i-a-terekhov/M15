@@ -15,6 +15,7 @@ import { CarouselModule } from "ngx-owl-carousel-o";
 import { AuthInterceptor } from "./core/auth/auth.interceptor";
 import { SharedModule } from "./shared/shared.module";
 import { BlogComponent } from './pages/blog/blog.component';
+import { ArticleComponent } from './pages/article/article.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { BlogComponent } from './pages/blog/blog.component';
     HeaderComponent,
     MainComponent,
     BlogComponent,
+    ArticleComponent,
   ],
   imports: [
     BrowserModule,

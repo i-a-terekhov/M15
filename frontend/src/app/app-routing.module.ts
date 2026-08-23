@@ -4,6 +4,7 @@ import { LayoutComponent } from "./shared/layout/layout.component";
 import { MainComponent } from "./pages/main/main.component";
 import { AuthForwardGuard } from "./core/auth/auth-forward.guard";
 import { BlogComponent } from "./pages/blog/blog.component";
+import { ArticleComponent } from "./pages/article/article.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
         canActivate: [AuthForwardGuard],
       },
       { path: 'blog', component: BlogComponent },
+      { path: 'article', component: ArticleComponent },
     ]
   }
 ];

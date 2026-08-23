@@ -22,14 +22,14 @@
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
-        align-items: start;
+        align-items: flex-start;
         margin-bottom: 27px;
 
         .labels-area {
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          justify-content: start;
+          justify-content: flex-start;
           gap: 10px;
 
           .filter-bar-label {
@@ -139,7 +139,7 @@
       .pseudo-carousel {
         display: flex;
         flex-wrap: wrap;
-        align-items: start;
+        align-items: flex-start;
         justify-content: space-between;
         gap: 40px 24px;
       }

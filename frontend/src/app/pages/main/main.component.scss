@@ -200,7 +200,7 @@
       .popular-footer {
         margin-top: 40px;
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
 
         .link-to-blog {
           text-decoration: none;
@@ -235,7 +235,7 @@
         border-radius: 5px;
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: flex-start;
         padding: 30px;
 
         .card-header {
@@ -306,7 +306,7 @@
         max-width: 500px;
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: flex-start;
         justify-content: flex-start;
 
         .contact-block {
