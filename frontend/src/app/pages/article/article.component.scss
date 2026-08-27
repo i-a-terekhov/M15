@@ -11,10 +11,11 @@
       line-height: 130%;
       color: $usual-blue-color;
 
-      span {
+      span, a {
         font-style: normal;
         font-weight: 400;
         color: #B9D5FD;
+        text-decoration: none;
       }
     }
 
@@ -202,10 +203,17 @@
                 line-height: 130%;
                 letter-spacing: 1.5px;
                 color: #FFFFFF;
+                cursor: pointer;
+
+                &:hover {
+                  background: $light-blue-color;
+                }
               }
             }
 
             .other-user-comments {
+              margin-top: 60px;
+
               .comment {
                 margin-bottom: 39px;
 
@@ -285,13 +293,16 @@
                     color: $dark-blue-color;
                     stroke: $dark-blue-color;
 
-                    &:hover {
-                      color: $button-disable-color;
-                      stroke: $button-disable-color;
+                    &:hover svg {
+                      color: $light-blue-color;
                     }
 
-                    &.action-spam:hover {
+                    &.action-spam:hover svg {
                       color: #fb7387;
+                    }
+
+                    &.active-reaction {
+                      color: $usual-blue-color;
                     }
 
                     span {

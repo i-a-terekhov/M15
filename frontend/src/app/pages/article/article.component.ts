@@ -1,5 +1,14 @@
 import { Component } from '@angular/core';
 import { environment } from "../../../environments/environment";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import { AuthService } from "../../core/auth/auth.service";
+import { forkJoin, of, Subject, switchMap, takeUntil, tap } from "rxjs";
+import { FullArticleType, FullCommentsType } from "../../../types/fullArticle.type";
+import { ArticlesService } from "../../shared/services/articles.service";
+import { CommentsService } from "../../shared/services/comments.service";
+import { CommentReactionType, ReactionActionType } from "../../../types/comments.type";
+import { ArticleType } from "../../../types/articles.type";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-article',
@@ -8,77 +17,77 @@ import { environment } from "../../../environments/environment";
 })
 export class ArticleComponent {
 
+  private destroy$ = new Subject<void>();
+
+  isLogged: boolean = false;
+
   staticPathForImages = environment.serverImages;
   image404path = 'assets/images/blank-pictures/article-card-notfound-picture.png';
-  userPic404path = 'assets/images/blank-pictures/user-without-photo.png';
+  userWithoutPicPath = 'assets/images/blank-pictures/user-without-photo.png';
 
-  probeArticle = {
-    text: "<h1>6 сайтов для повышения продуктивности</h1>" +
-      "<p>Хотите проводить время в сети с пользой? Наша подборка из шести полезных, но малоизвестных сайтов увеличит вашу продуктивность, поможет успевать больше в течение дня и всегда быть на шаг впереди!</p>" +
-      "<p>Кто из нас не хочет быть продуктивным и успевать за день больше, чем его знакомые? К сожалению, никто не может создать 25-й час в сутках, поэтому делимся с вами парочкой сервисов, которые точно помогут вам спланировать свои дела и расставить приоритетность задач.</p>" +
-      "<h3>1. Pomotodo https://pomotodo.com/intl/ru/</h3>" +
-      "<p>Известный способ борьбы с прокрастинацией — <b>техника Pomodoro</b>. Делите процесс на равные промежутки и чередуете с отдыхом: 25 минут работаем, 5 минут не работаем. Так проще концентрироваться на текущих задачах и не уставать. А приложение Pomotodo — отличный инструмент, который позволит настроить таймер, указать перерывы и следить за своим прогрессом.</p>" +
-      "<h3>2. Noisli https://www.noisli.com/</h3>\n" +
-      "<p>Если фоновый шум в вашем рабочем пространстве мешает вашей концентрации, вы можете скачать Nosli.</p>" +
-      "<p>С помощью Noisli вы можете заглушить отвлекающие фоновые звуки и заменить их фоновыми мелодиями кофейни, дождя, ветра или волн. <b>Эти успокаивающие звуки могут помочь вам сосредоточиться на том, что находится перед вами, повысить продуктивность в разы, не позволяя вам отвлекаться на каждый фоновый звук или шум.</b></p>" +
-      "<p>Вы можете настроить звуки, которые вы слушаете, создавая идеальный саундтрек для работы. Это не только может помочь вам быть более продуктивным на работе, но вы также можете использовать звуки, чтобы помочь вам расслабиться или даже заснуть.</p>" +
-      "<h3>3. Habitica https://habitica.com/static/home</h3>" +
-      "<p>Не совсем обычное приложение для планирования предлагает игровой подход к ведению вашего списка дел. <b>Habitica – пиксельная игрушка, призванная мотивировать вас на саморазвитие.</b></p>" +
-      "<p>Все ваши задачи – это миссии, выполнение которых позволяет повышать ваш уровень и прокачивать новые умения (даже внутриигровая валюта есть).</p>" +
-      "<h3>4. Notion https://www.notion.so/</h3>" +
-      "<p>Разработчики из Notion решили не ограничиваться чём-то одним и создали приложение, которое <b>способно заменить сразу Google Docs, Evernote или Trello</b>. В Notion можно делать заметки, списки дел, а также прикреплять документы, таблицы и создавать канбан-доски. В приложении можно добавлять или удалять элементы и собирать свой идеальный инструмент продуктивности.</p>" +
-      "<h3>5. Workflow https://workflow.is/</h3>" +
-      "<p>Workflow позволяет создавать шорткаты, которые автоматизируют последовательность действий. К примеру, нажав на одну кнопку, вы можете сделать из веб-страницы PDF-файл или сделать три фотографии, превратить их в GIF и отправить в сообщении. <b>Возможности Workflow практически неограниченны</b>, так как шорткаты можно как искать, так и создавать самостоятельно.</p>" +
-      "<h3>6. Sunsama https://www.sunsama.com/</h3>" +
-      "<p><b>Sunsama — инструмент для командной работы и удобное приложение для отдельных пользователей.</b> Оно отображает ваши текущие задачи в форме календаря или канбан-карточек. Подключите свой «Google Календарь», и все задачи из него окажутся в Sunsama. Возможен экспорт проектов в Trello, интеграция со Slack и чат для командной работы.</p>\n",
-    comments: [
-      {
-        "id": "6a69cf053e9ffc0091993a63",
-        "text": "Вот это классная статья6! Спасибо за полезную информацию!!!!",
-        "date": "2026-07-29T09:59:33.538Z",
-        "likesCount": 0,
-        "dislikesCount": 0,
-        "user": {
-          "id": "6a60e1c83ea96bf1ed239f2c",
-          "name": "Тест"
-        }
-      },
-      {
-        "id": "6a69ce7f3e9ffc0091993a49",
-        "text": "Вот это классная статья6! Спасибо за полезную информацию!!!",
-        "date": "2026-07-29T09:57:19.588Z",
-        "likesCount": 0,
-        "dislikesCount": 0,
-        "user": {
-          "id": "6a60e1c83ea96bf1ed239f2c",
-          "name": "Тест"
-        }
-      },
-      {
-        "id": "6a69ce7e3e9ffc0091993a46",
-        "text": "Вот это классная статья6! Спасибо за полезную информацию!!!",
-        "date": "2026-07-29T09:57:18.768Z",
-        "likesCount": 0,
-        "dislikesCount": 0,
-        "user": {
-          "id": "6a60e1c83ea96bf1ed239f2c",
-          "name": "Тест"
-        }
-      }
-    ],
-    commentsCount: 6,
-    id: "6a60e1c83ea96bf1ed239f34",
-    title: "6 сайтов для повышения  продуктивности",
-    description: "Хотите проводить время в сети с пользой? Наша подборка из шести полезных, но малоизвестных сайтов увеличит вашу продуктивность, поможет успевать больше в течение дня и всегда быть на шаг впереди!",
-    image: this.image404path,
-    date: "2026-07-22T15:29:12.243Z",
-    category: "Фриланс",
-    url: "6_saitov_dlya_povisheniya__produktivnosti"
-  }
+  fullArticle?: FullArticleType;
   cleanHtmlArticleBody: string = '';
+  appearedComments: FullCommentsType[] = [];
+  userReactionByCommentId = new Map<string, ReactionActionType>();
+
+  relatedArticleCards: ArticleType[] = [];
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private authService: AuthService,
+              private articlesService: ArticlesService,
+              private commentsService: CommentsService,
+              private snackBar: MatSnackBar,
+  ) {
+    this.isLogged = authService.getIsLoggedIn();
+  }
 
   ngOnInit() {
-    this.cleanHtmlArticleBody = this.removeFirstElements(this.probeArticle.text);
+    this.authService.isLogged$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(isLoggedIn => this.isLogged = isLoggedIn);
+
+    this.activatedRoute.paramMap
+      .pipe(
+        switchMap((paramMap: ParamMap) => {
+          const url = paramMap.get('url');
+          return url ? this.articlesService.getFullArticle(url) : of(null);
+        }),
+        switchMap(article => {
+          if (!article) return of(null);
+
+          return forkJoin({
+            article: of(article),
+            related: this.articlesService.getRelatedArticles(article.url)
+          });
+        }),
+        takeUntil(this.destroy$) // Защита от утечки памяти
+      )
+      .subscribe({
+        next: (data) => {
+          if (!data) return;
+
+          const { article, related } = data;
+
+          this.fullArticle = article;
+          this.cleanHtmlArticleBody = this.removeFirstElements(article.text);
+          this.appearedComments = [...article.comments];
+          this.relatedArticleCards = related;
+
+          if (this.isLogged) {
+            this.loadUserReactions(article.id);
+          }
+        },
+        error: (err) => {
+          console.error(err.message);
+          this.router.navigate(['blog']);
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   removeFirstElements(htmlString: string): string {
@@ -98,7 +107,7 @@ export class ArticleComponent {
   }
 
   get imageUrl(): string {
-    const img = this.probeArticle?.image;
+    const img = this.fullArticle?.image;
 
     if (!img) {
       return this.image404path;
@@ -107,6 +116,135 @@ export class ArticleComponent {
       return img;
     }
     return this.staticPathForImages + img;
+  }
+
+  getMoreComments() {
+    this.commentsService.getMoreComments({
+      offset: this.appearedComments.length,
+      article: this.fullArticle!.id
+    })
+      .subscribe(newPortionOfComments => {
+        this.appearedComments = [...this.appearedComments, ...newPortionOfComments.comments]; // перезапись позволит
+      })
+  }
+
+  private loadUserReactions(articleId: string): void {
+    this.commentsService.getUserReactions(articleId)
+      .subscribe({
+        next: (reactions: CommentReactionType[]) => {
+          const reactionMap = new Map<string, ReactionActionType>();
+
+          reactions.forEach(reaction => {
+            reactionMap.set(
+              reaction.comment,
+              reaction.action
+            );
+          });
+          this.userReactionByCommentId = reactionMap;
+        }
+      })
+  }
+
+  postUserComment(textarea: HTMLTextAreaElement): void {
+    const commentText = textarea.value.trim();
+    if (!commentText || !this.fullArticle) {
+      return;
+    }
+
+    const articleId = this.fullArticle.id;
+
+    this.commentsService.postUserComment(articleId, commentText)
+      .pipe(
+        tap(() => {
+          textarea.value = '';
+        }),
+        switchMap(() =>
+          this.commentsService.getMoreComments({
+            offset: 0,
+            article: articleId
+          })
+        )
+      )
+      .subscribe({
+        next: commentsData => {
+          this.appearedComments = [...commentsData.comments];
+
+          if (this.fullArticle) {
+            this.fullArticle = {
+              ...this.fullArticle,
+              comments: [...commentsData.comments],
+              commentsCount: this.fullArticle.commentsCount + 1
+            };
+          }
+        },
+
+        error: err => {
+          console.error(err.message);
+        }
+      })
+  }
+
+  postUserReaction(commentId: string, action: ReactionActionType) {
+    const previousAction = this.userReactionByCommentId.get(commentId) ?? null;
+    const nextAction = previousAction === action ? null : action;
+
+    this.commentsService.postUserReaction(commentId, action)
+      .subscribe({
+        next: response => {
+          if (action === 'like' || action === 'dislike') {
+            this.updateCommentCounters(commentId, previousAction, nextAction);
+            this.snackBar.open('Ваш голос учтен')
+          }
+
+          if (action === 'violate') {
+            this.snackBar.open('Жалоба отправлена')
+          }
+
+          if (this.fullArticle) {
+            this.loadUserReactions(this.fullArticle.id);
+          }
+        },
+        error: err => {
+          if (err.error.message && err.error.message === 'No auth token') {
+            this.snackBar.open('Чтобы отреагировать, нужно быть залогиненым')
+          }
+
+          if (err.error.message && err.error.message === 'Это действие уже применено к комментарию') {
+            this.snackBar.open('Жалоба уже отправлена')
+          }
+
+        }
+      })
+  }
+
+  private updateCommentCounters(commentId: string, previousAction: ReactionActionType | null, nextAction: ReactionActionType | null): void {
+    this.appearedComments =
+      this.appearedComments.map(comment => {
+        if (comment.id !== commentId) {
+          return comment;
+        }
+
+        let likesCount = comment.likesCount;
+        let dislikesCount = comment.dislikesCount;
+
+        if (previousAction === 'like') {
+          likesCount--;
+        }
+
+        if (previousAction === 'dislike') {
+          dislikesCount--;
+        }
+
+        if (nextAction === 'like') {
+          likesCount++;
+        }
+
+        if (nextAction === 'dislike') {
+          dislikesCount++;
+        }
+
+        return { ...comment, likesCount, dislikesCount };
+      });
   }
 
 }

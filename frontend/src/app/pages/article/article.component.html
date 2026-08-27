@@ -1,11 +1,11 @@
 <section class="article">
   <div class="container">
-    <div class="breadcrumbs"><span>Блог / </span>{{ probeArticle.title }}</div>
+    <div class="breadcrumbs"><span><a routerLink="/blog">Блог / </a></span>{{ fullArticle?.title }}</div>
     <div class="chapter chapter-article">
       <div class="chapter-top-part">
         <div class="top-text-part">
-          <div class="chapter-title chapter-title--article">{{ probeArticle.title }}</div>
-          <div class="title-description">{{ probeArticle.description }}</div>
+          <div class="chapter-title chapter-title--article">{{ fullArticle?.title }}</div>
+          <div class="title-description">{{ fullArticle?.description }}</div>
         </div>
         <div class="top-image-part" [style.background-image]="'url(' + imageUrl + ')'"></div>
       </div>
@@ -35,122 +35,53 @@
             </div>
           </div>
           <div class="comments">
-            <div class="empty-block"></div>
+            <div class="empty-block" *ngIf="isLogged"></div>
             <div class="comments-title">Комментарии к статье</div>
-            <div class="unlogged-suggestion">Чтобы оставлять комментарии, <a routerLink="login">войдите</a> или <a
-              routerLink="signup">зарегистрируйтесь</a>.
+            <div class="unlogged-suggestion" *ngIf="!isLogged">
+              Чтобы оставлять комментарии, <a routerLink="/login">войдите</a>
+              или <a routerLink="/signup">зарегистрируйтесь</a>.
             </div>
-            <div class="first-comment-suggestion">Будьте первым, кто оставит свой комментарий к статье!</div>
-            <div class="user-comments-make-area">
-              <textarea placeholder="Напишите Ваш комментарий к статье..."></textarea>
-              <button>Опубликовать комментарий</button>
+            <div class="first-comment-suggestion" *ngIf="(appearedComments.length === 0) && isLogged">
+              Будьте первым, кто оставит свой комментарий к статье!
+            </div>
+            <div class="user-comments-make-area" *ngIf="isLogged">
+              <textarea #textarea placeholder="Напишите Ваш комментарий к статье..."></textarea>
+              <button type="button" (click)="postUserComment(textarea)">Опубликовать комментарий</button>
             </div>
             <div class="other-user-comments">
-              <div class="comment">
+              <div class="comment" *ngFor="let comment of appearedComments">
                 <div class="comment-header">
-                  <div class="icon">
-                    <svg width="60" height="60">
-                      <use href="assets/icons/articles-icons.svg#user-no-picture"></use>
-                    </svg>
-                  </div>
-<!--                  <img src="{{ userPic404path }}" alt="userPic">-->
+                  <!--                                    <div class="icon">-->
+                  <!--                                      <svg width="60" height="60">-->
+                  <!--                                        <use href="assets/icons/articles-icons.svg#user-no-picture"></use>-->
+                  <!--                                      </svg>-->
+                  <!--                                    </div>-->
+                  <img src="{{ userWithoutPicPath }}" alt="userPic">
                   <div class="username-and-time">
-                    <span class="username">Амелия</span>
-                    <span class="time">20.01.2023 23:00</span>
+                    <span class="username">{{ comment.user.name }}</span>
+                    <span class="time">{{ comment.date }}</span>
                   </div>
                 </div>
-                <div class="comment-text">
-                  Статья супер, спасибо! Взяла на заметку очень многое для себя и своей фирмы по разработке
-                  пользовательского интерфейса. Хотелось бы послушать мнение других тоже!
-                </div>
+                <div class="comment-text">{{ comment.text }}</div>
                 <div class="comment-actions">
-                  <div class="comment-action action-like">
-                    <span class="amount">51</span>
+                  <div class="comment-action action-like"
+                       [class.active-reaction]="userReactionByCommentId.get(comment.id) === 'like'"
+                       (click)="postUserReaction(comment.id, 'like')">
+                    <span class="amount">{{ comment.likesCount }}</span>
                     <svg width="24" height="24">
                       <use href="assets/icons/articles-icons.svg#no-stroke-like"></use>
                     </svg>
                   </div>
-                  <div class="comment-action action-dislike">
-                    <span class="amount">2</span>
+                  <div class="comment-action action-dislike"
+                       [class.active-reaction]="userReactionByCommentId.get(comment.id) === 'dislike'"
+                       (click)="postUserReaction(comment.id, 'dislike')">
+                    <span class="amount">{{ comment.dislikesCount }}</span>
                     <svg width="24" height="24">
                       <use href="assets/icons/articles-icons.svg#no-stroke-dislike"></use>
                     </svg>
                   </div>
-                  <div class="comment-action action-spam">
-                    <svg width="24" height="24">
-                      <use href="assets/icons/articles-icons.svg#no-stroke-spam"></use>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="icon">
-                    <svg width="60" height="60">
-                      <use href="assets/icons/articles-icons.svg#user-no-picture"></use>
-                    </svg>
-                  </div>
-<!--                  <img src="{{ userPic404path }}" alt="userPic">-->
-                  <div class="username-and-time">
-                    <span class="username">Амелия</span>
-                    <span class="time">20.01.2023 23:00</span>
-                  </div>
-                </div>
-                <div class="comment-text">
-                  Статья супер, спасибо! Взяла на заметку очень многое для себя и своей фирмы по разработке
-                  пользовательского интерфейса. Хотелось бы послушать мнение других тоже!
-                </div>
-                <div class="comment-actions">
-                  <div class="comment-action action-like">
-                    <span class="amount">51</span>
-                    <svg width="24" height="24">
-                      <use href="assets/icons/articles-icons.svg#no-stroke-like"></use>
-                    </svg>
-                  </div>
-                  <div class="comment-action action-dislike">
-                    <span class="amount">2</span>
-                    <svg width="24" height="24">
-                      <use href="assets/icons/articles-icons.svg#no-stroke-dislike"></use>
-                    </svg>
-                  </div>
-                  <div class="comment-action action-spam">
-                    <svg width="24" height="24">
-                      <use href="assets/icons/articles-icons.svg#no-stroke-spam"></use>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div class="comment">
-                <div class="comment-header">
-                  <div class="icon">
-                    <svg width="60" height="60">
-                      <use href="assets/icons/articles-icons.svg#user-no-picture"></use>
-                    </svg>
-                  </div>
-<!--                  <img src="{{ userPic404path }}" alt="userPic">-->
-                  <div class="username-and-time">
-                    <span class="username">Амелия</span>
-                    <span class="time">20.01.2023 23:00</span>
-                  </div>
-                </div>
-                <div class="comment-text">
-                  Статья супер, спасибо! Взяла на заметку очень многое для себя и своей фирмы по разработке
-                  пользовательского интерфейса. Хотелось бы послушать мнение других тоже!
-                </div>
-                <div class="comment-actions">
-                  <div class="comment-action action-like">
-                    <span class="amount">51</span>
-                    <svg width="24" height="24">
-                      <use href="assets/icons/articles-icons.svg#no-stroke-like"></use>
-                    </svg>
-                  </div>
-                  <div class="comment-action action-dislike">
-                    <span class="amount">2</span>
-                    <svg width="24" height="24">
-                      <use href="assets/icons/articles-icons.svg#no-stroke-dislike"></use>
-                    </svg>
-                  </div>
-                  <div class="comment-action action-spam">
+                  <div class="comment-action action-spam"
+                       (click)="postUserReaction(comment.id, 'violate')">
                     <svg width="24" height="24">
                       <use href="assets/icons/articles-icons.svg#no-stroke-spam"></use>
                     </svg>
@@ -158,7 +89,9 @@
                 </div>
               </div>
             </div>
-            <button type="button" class="get-more-comments">
+            <button type="button" class="get-more-comments"
+                    *ngIf="fullArticle && (fullArticle.commentsCount - appearedComments.length) > 0"
+                    (click)="getMoreComments()">
               <span>Загрузить ещё комментарии</span>
               <svg width="24" height="24">
                 <use href="assets/icons/articles-icons.svg#no-fill-arrow-down"></use>
@@ -168,8 +101,9 @@
         </div>
         <aside class="aside-read-more">
           <div class="read-more-title">Читайте также:</div>
-          <article-card></article-card>
-          <article-card></article-card>
+          <article-card *ngFor="let card of relatedArticleCards" [article]="card"></article-card>
+          <article-card *ngIf="relatedArticleCards.length === 0"></article-card>
+          <article-card *ngIf="relatedArticleCards.length === 0"></article-card>
         </aside>
       </div>
     </div>

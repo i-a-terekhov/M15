@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { ArticlesType, ArticleType } from "../../../types/articles.type";
 import { ActiveQueryParamsType } from "../../../types/active-query-params.type";
+import { FullArticleType } from "../../../types/fullArticle.type";
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,13 @@ export class ArticlesService {
 
   getArticlesWithFilter(params: ActiveQueryParamsType): Observable<ArticlesType> {
     return this.http.get<ArticlesType>(`${environment.api}articles`, { params });
+  }
+
+  getFullArticle(url: string): Observable<FullArticleType> {
+    return this.http.get<FullArticleType>(`${environment.api}articles/` + url);
+  }
+
+  getRelatedArticles(url: string): Observable<ArticleType[]> {
+    return this.http.get<ArticleType[]>(`${environment.api}articles/related/` + url);
   }
 }

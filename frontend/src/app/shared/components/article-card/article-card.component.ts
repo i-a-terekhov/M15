@@ -11,6 +11,7 @@ export class ArticleCardComponent {
 
   staticPathForImages = environment.serverImages;
   image404path = 'assets/images/blank-pictures/article-card-notfound-picture.png';
+  link404path = 'blog';
 
   @Input() article: ArticleType = {
     id: 'notfound',
@@ -19,7 +20,7 @@ export class ArticleCardComponent {
     image: this.image404path,
     date: 'nodate',
     category: 'Ошибка',
-    url: '/blog',
+    url: this.link404path,
   };
 
   // В случае, если в <article-card> не будет передан article, необходимо взять локальную картинку. Так же локальная картинка
@@ -35,6 +36,18 @@ export class ArticleCardComponent {
       return img;
     }
     return this.staticPathForImages + img;
+  }
+
+  get linkUrl(): string {
+    const link = this.article?.url;
+
+    if (!link) {
+      return this.link404path;
+    }
+    if (link !== this.link404path) {
+      return 'articles/' + link;
+    }
+    return link;
   }
 
 }

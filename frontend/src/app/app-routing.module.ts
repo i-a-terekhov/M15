@@ -17,7 +17,7 @@ const routes: Routes = [
         canActivate: [AuthForwardGuard],
       },
       { path: 'blog', component: BlogComponent },
-      { path: 'article', component: ArticleComponent },
+      { path: 'articles/:url', component: ArticleComponent },
     ]
   }
 ];
