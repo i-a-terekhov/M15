@@ -22,7 +22,7 @@
     </div>
 
     <!--    #PART CHAPTER ---------- 2  -->
-    <div class="chapter chapter-our-services" *ngIf="ourServices">
+    <div class="chapter chapter-our-services" id="our-services" *ngIf="ourServices">
       <div class="chapter-title chapter-title--our-services">Услуги, которые мы предлагаем</div>
       <div class="pseudo-carousel">
         <our-services-card [ourService]="ourService" *ngFor="let ourService of ourServices"></our-services-card>
@@ -30,7 +30,7 @@
     </div>
 
     <!--    #PART CHAPTER ---------- 3  -->
-    <div class="chapter chapter-about-us">
+    <div class="chapter chapter-about-us" id="about-us">
       <div class="about-picture"></div>
       <div class="about-content">
         <div class="chapter-title">Кто мы и чем мы занимаемся?</div>
@@ -92,7 +92,7 @@
     </div>
 
     <!--    #PART CHAPTER ---------- 5  -->
-    <div class="chapter chapter-reviews" *ngIf="reviews && reviews.length > 0">
+    <div class="chapter chapter-reviews" id="reviews" *ngIf="reviews && reviews.length > 0">
       <div class="chapter-title chapter-title--reviews">Отзывы о нашей работе</div>
       <owl-carousel-o [options]="reviewsOwlOptions" #owlReviewsCar>
         <ng-template carouselSlide *ngFor="let review of reviews">
@@ -114,11 +114,11 @@
     </div>
 
     <!--    #PART CHAPTER ---------- 6  -->
-    <div class="chapter chapter-contacts">
+    <div class="chapter chapter-contacts" id="contacts">
       <div class="contacts-map">
-<!--        <iframe-->
-<!--          src="https://yandex.ru/map-widget/v1/?um=constructor%3A1668d5f20bd636f52351b07d005af2c79f6aeb5780489b45087daddd228b5b22&amp;source=constructor"-->
-<!--          width="607" height="438" frameborder="0"></iframe>-->
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?um=constructor%3A1668d5f20bd636f52351b07d005af2c79f6aeb5780489b45087daddd228b5b22&amp;source=constructor"
+          width="607" height="438" frameborder="0"></iframe>
       </div>
       <div class="contacts-content">
         <div class="chapter-title chapter-title--contacts">Контакты</div>
@@ -126,26 +126,32 @@
           <div class="subtitle">Адрес</div>
           <span>Главный офис компании АйтиШторм находится по адресу Пресненская наб., 12, Москва, Россия, 123317.</span>
         </div>
-        <div class="contact-block">
+        <div class="contact-block phone">
           <div class="subtitle">Телефон</div>
-          <span>+7 (499) 343-13-34</span>
+          <a href="tel:+74993431334">+7 (499) 343-13-34</a>
         </div>
         <div class="contact-block">
           <div class="subtitle">Электронный адрес</div>
-          <span>info@itstorm.com</span>
+          <a href="mailto:info@itstorm.com">info@itstorm.com</a>
         </div>
         <div class="contact-block">
           <div class="subtitle">Мы в социальных сетях</div>
           <div class="media-icons">
-            <svg width="30" height="30">
-              <use href="../../assets/icons/icons.svg#vk-icon-30"></use>
-            </svg>
-            <svg width="30" height="30">
-              <use href="../../assets/icons/icons.svg#facebook-icon-30"></use>
-            </svg>
-            <svg width="30" height="30">
-              <use href="../../assets/icons/icons.svg#instagram-icon-30"></use>
-            </svg>
+            <a href="https://vk.ru/">
+              <svg width="30" height="30">
+                <use href="../../assets/icons/icons.svg#vk-icon-30"></use>
+              </svg>
+            </a>
+            <a href="https://facebook.com/">
+              <svg width="30" height="30">
+                <use href="../../assets/icons/icons.svg#facebook-icon-30"></use>
+              </svg>
+            </a>
+            <a href="https://instagram.com/">
+              <svg width="30" height="30">
+                <use href="../../assets/icons/icons.svg#instagram-icon-30"></use>
+              </svg>
+            </a>
           </div>
         </div>
       </div>

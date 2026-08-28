@@ -22,8 +22,13 @@
         </div>
         <div class="auth-checkbox">
           <input type="checkbox" id="agree-checkbox" formControlName="agree">
-          <label for="agree-checkbox">Я принимаю <a href="#">условия пользовательского соглашения</a> и даю <a
-            href="#">согласие на обработку персональных данных</a>.</label>
+          <label for="agree-checkbox">Я принимаю
+            <a routerLink="/terms" fragment="user-agreement" target="_blank" rel="noopener noreferrer">
+              условия пользовательского соглашения</a>
+            и даю
+            <a routerLink="/terms" fragment="personal-data-processing" target="_blank" rel="noopener noreferrer">
+              согласие на обработку персональных данных</a>.
+          </label>
         </div>
       </div>
       <div class="auth-button">

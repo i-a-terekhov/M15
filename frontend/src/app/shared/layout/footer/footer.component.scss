@@ -29,16 +29,16 @@
             list-style: none;
             border-bottom: 1px solid transparent;
 
-            &:active {
-              border-bottom: 1px solid $dark-blue-color;
-            }
-
             a {
               font-weight: 500;
               font-size: 16px;
               color: $dark-blue-color;
               cursor: pointer;
               text-decoration: none;
+
+              &.active {
+                color: $usual-blue-color;
+              }
             }
           }
         }
@@ -68,11 +68,13 @@
         }
 
         .item-describe {
+          display: block;
           font-style: normal;
           font-size: 16px;
           color: $dark-blue-color;
           line-height: 130%;
           margin-bottom: 10px;
+          text-decoration: none;
         }
 
         .item-actions {

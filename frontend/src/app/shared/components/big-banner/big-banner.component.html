@@ -6,6 +6,6 @@
     <div class="title" [innerHTML]="banner.title"></div>
     <div class="additional-text" [innerHTML]="banner.additionalText"></div>
     <div class="additional-lower-space" *ngIf="banner.additionalLowerSpace"></div>
-    <button class="button">Подробнее</button>
+    <button class="button" (click)="sendServiceName(banner.nameOfServiceCategory)">Подробнее</button>
   </div>
 </div>

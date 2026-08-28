@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoaderComponent } from './components/loader/loader.component';
+import { LoadersComponent } from './components/loader/loaders.component';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { OurServicesCardComponent } from './components/our-services-card/our-services-card.component';
 import { BigBannerComponent } from './components/big-banner/big-banner.component';
@@ -14,7 +14,7 @@ import { MatSelect, MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [
-    LoaderComponent,
+    LoadersComponent,
     OurServicesCardComponent,
     BigBannerComponent,
     ArticleCardComponent,
@@ -28,7 +28,7 @@ import { MatSelect, MatSelectModule } from "@angular/material/select";
     MatFormFieldModule,
     MatSelectModule,
   ],
-  exports: [LoaderComponent, OurServicesCardComponent, BigBannerComponent, ArticleCardComponent, OrderPopupComponent],
+  exports: [LoadersComponent, OurServicesCardComponent, BigBannerComponent, ArticleCardComponent, OrderPopupComponent],
 })
 export class SharedModule {
 }

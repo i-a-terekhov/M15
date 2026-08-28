@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { environment } from "../../../environments/environment";
 import { OwlOptions } from "ngx-owl-carousel-o";
 import { ArticlesService } from "../../shared/services/articles.service";
-import { ArticlesType, ArticleType } from "../../../types/articles.type";
+import { ArticleType } from "../../../types/articles.type";
+import { BigBannerType } from "../../../types/big-banner.type";
 
 @Component({
   selector: 'app-main',
@@ -11,7 +11,7 @@ import { ArticlesType, ArticleType } from "../../../types/articles.type";
 })
 export class MainComponent {
 
-  banners = [
+  banners: BigBannerType[] = [
     {
       image: 'assets/images/big-banner/Image(1).png',
       additionalUpperSpace: true,
@@ -19,6 +19,7 @@ export class MainComponent {
       title: 'Продвижение в<br>Instagram для вашего<br>бизнеса <span>-15%</span>!',
       additionalText: '',
       additionalLowerSpace: false,
+      nameOfServiceCategory: 'Таргет',
     },
     {
       image: 'assets/images/big-banner/Image(2).png',
@@ -27,6 +28,7 @@ export class MainComponent {
       title: 'Нужен грамотный<br><span>копирайтер</span>?',
       additionalText: 'Весь декабрь у нас действует акция<br>на работу копирайтера.',
       additionalLowerSpace: true,
+      nameOfServiceCategory: 'Копирайтинг',
     },
     {
       image: 'assets/images/big-banner/Image(3).png',
@@ -35,6 +37,7 @@ export class MainComponent {
       title: '<span>6 место</span> в ТОП-10<br>SMM-агенств Москвы!',
       additionalText: 'Мы благодарим каждого, кто<br>голосовал за нас!',
       additionalLowerSpace: true,
+      nameOfServiceCategory: 'SMM',
     },
   ];
   bannersOwlOptions: OwlOptions = {

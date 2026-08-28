@@ -5,4 +5,5 @@ export type BigBannerType = {
   title: string,
   additionalText?: string,
   additionalLowerSpace?: boolean,
+  nameOfServiceCategory: string,
 }

@@ -1,17 +1,33 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-upper-part">
-      <svg width="85" height="47">
-        <use href="../../../assets/icons/icons.svg#main-icon"></use>
-      </svg>
+      <a routerLink="/">
+        <svg width="85" height="47">
+          <use href="../../../assets/icons/icons.svg#main-icon"></use>
+        </svg>
+      </a>
       <div class="footer-upper-part-menu">
         <nav>
           <ul>
-            <li><a routerLink="/">Услуги</a></li>
-            <li><a routerLink="/">О нас</a></li>
-            <li><a routerLink="blog">Статьи</a></li>
-            <li><a routerLink="/">Отзывы</a></li>
-            <li><a routerLink="/">Контакты</a></li>
+            <li><a routerLink="/" fragment="our-services" routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+              Услуги</a>
+            </li>
+            <li><a routerLink="/" fragment="about-us" routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+              О нас</a></li>
+            <li><a routerLink="blog" routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+              Статьи</a>
+            </li>
+            <li><a routerLink="/" fragment="reviews" routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+              Отзывы</a>
+            </li>
+            <li><a routerLink="/" fragment="contacts" routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+              Контакты</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -24,29 +40,30 @@
       </div>
       <div class="footer-lower-part-item phone">
         <div class="item-header">Телефон</div>
-        <div class="item-describe">+7 (499) 343-13-34</div>
-        <div class="item-actions"><button (click)="sendConsultRequest()" class="footer-button">Перезвоните мне</button></div>
+        <a href="tel:+74993431334" class="item-describe">+7 (499) 343-13-34</a>
+        <div class="item-actions">
+          <button (click)="sendConsultRequest()" class="footer-button">Перезвоните мне</button>
+        </div>
       </div>
       <div class="footer-lower-part-item email">
         <div class="item-header">E-mail</div>
-        <div class="item-actions"><a routerLink="/">info@itstorm.com</a>
-          </div>
+        <a class="item-describe" href="mailto:info@itstorm.com">info@itstorm.com</a>
       </div>
       <div class="footer-lower-part-item social-midea">
         <div class="item-header">Мы в социальных сетях:</div>
         <div class="item-actions">
           <div class="icons-block">
-            <a routerLink="/">
+            <a href="https://vk.ru/">
               <svg width="24" height="24">
                 <use href="../../../assets/icons/icons.svg#vk-icon"></use>
               </svg>
             </a>
-            <a routerLink="/">
+            <a href="https://facebook.com/">
               <svg width="24" height="24">
                 <use href="../../../assets/icons/icons.svg#facebook-icon"></use>
               </svg>
             </a>
-            <a routerLink="/">
+            <a href="https://instagram.com/">
               <svg width="24" height="24">
                 <use href="../../../assets/icons/icons.svg#instagram-icon"></use>
               </svg>

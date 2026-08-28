@@ -17,6 +17,6 @@ export class LoaderService {
   hide() {
     setTimeout(() => { // имитация задержки сервера
       this.isShowed$.next(false);
-    }, 300);
+    }, 500);
   }
 }

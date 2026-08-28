@@ -1,16 +1,28 @@
 <header class="header">
   <div class="container">
-    <svg width="85" height="47">
-      <use href="../../../assets/icons/icons.svg#main-icon"></use>
-    </svg>
+    <a routerLink="/">
+      <svg width="85" height="47">
+        <use href="../../../assets/icons/icons.svg#main-icon"></use>
+      </svg>
+    </a>
     <div class="header-menu">
       <nav>
         <ul>
-          <li><a routerLink="/">Услуги</a></li>
-          <li><a routerLink="/">О нас</a></li>
-          <li><a routerLink="blog">Статьи</a></li>
-          <li><a routerLink="/">Отзывы</a></li>
-          <li><a routerLink="/">Контакты</a></li>
+          <li><a routerLink="/" fragment="our-services" routerLinkActive="active"
+                 [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+            Услуги</a></li>
+          <li><a routerLink="/" fragment="about-us" routerLinkActive="active"
+                 [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+            О нас</a></li>
+          <li><a routerLink="blog" routerLinkActive="active"
+                 [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+            Статьи</a></li>
+          <li><a routerLink="/" fragment="reviews" routerLinkActive="active"
+                 [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+            Отзывы</a></li>
+          <li><a routerLink="/" fragment="contacts" routerLinkActive="active"
+                 [routerLinkActiveOptions]="{ paths: 'exact', queryParams: 'ignored', fragment: 'exact', matrixParams: 'ignored' }">
+            Контакты</a></li>
         </ul>
       </nav>
     </div>

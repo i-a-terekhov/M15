@@ -27,22 +27,24 @@
           list-style: none;
           border-bottom: 1px solid transparent;
 
-          &.active {
-            border-bottom: 1px solid $dark-blue-color;
-          }
-
           a {
             font-weight: 500;
             font-size: 16px;
             color: $dark-blue-color;
             cursor: pointer;
             text-decoration: none;
+
+            &.active {
+              color: $usual-blue-color;
+            }
           }
         }
       }
     }
 
     .header-phone {
+      display: block;
+      text-decoration: none;
       font-weight: 500;
       font-size: 16px;
       color: $usual-blue-color;

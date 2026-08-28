@@ -47,7 +47,7 @@ export class OrderPopupComponent {
         const currentScrollY = window.scrollY;   // запоминаем положение страницы при вызове попапа
 
         this.isRequestError = false;
-        if (this.servicesList && this.servicesList.length === 0) {
+        if (this.servicesList && this.servicesList.length === 0) {   // Первые 3 сек. после загрузки приложения servicesList = false (для демонстрации)
           this.snackBar.open('Медленное соединение! Попробуйте позже')
           return;
         }

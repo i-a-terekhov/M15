@@ -333,9 +333,20 @@
             color: $dark-blue-color;
           }
 
+          a {
+            display: inline;
+            text-decoration: none;
+            margin-top: 10px;
+            font-style: normal;
+            font-size: 14px;
+            line-height: 130%;
+            color: $dark-blue-color;
+          }
+
           .media-icons {
             svg {
               margin-right: 20px;
+              cursor: pointer;
             }
           }
         }

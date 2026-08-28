@@ -1,0 +1,49 @@
+@import "../../../assets/styles/variables";
+
+.terms {
+  font-family: 'Lora', serif;
+
+  .container {
+    width: 90%;
+
+    .chapter-terms {
+      margin-top: 50px;
+      margin-bottom: 70px;
+
+      .chapter-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 38px;
+        line-height: 130%;
+        color: $usual-blue-color;
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
+
+      .chapter-text {
+        margin-top: 0;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 130%;
+        color: $dark-blue-color;
+
+        h3 {
+          color: $usual-blue-color;
+          font-size: 18px;
+          margin-top: 20px;
+          margin-bottom: 10px;
+        }
+
+        p {
+          margin-top: 10px;
+          margin-bottom: 10px;
+
+          b {
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+  }
+}

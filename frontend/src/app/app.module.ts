@@ -16,6 +16,7 @@ import { AuthInterceptor } from "./core/auth/auth.interceptor";
 import { SharedModule } from "./shared/shared.module";
 import { BlogComponent } from './pages/blog/blog.component';
 import { ArticleComponent } from './pages/article/article.component';
+import { TermsComponent } from './pages/terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ArticleComponent } from './pages/article/article.component';
     MainComponent,
     BlogComponent,
     ArticleComponent,
+    TermsComponent,
   ],
   imports: [
     BrowserModule,

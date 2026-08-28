@@ -3,6 +3,8 @@
 html {
   overflow-y: auto;
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+  cursor: context-menu;
 }
 
 html, body {
