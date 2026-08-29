@@ -6,6 +6,7 @@ import { DefaultResponseType } from "../../../../types/default-response.type";
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import { InputErrorType } from "../../../../types/inputs-error.type";
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,11 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent {
 
+  protected readonly InputErrorType = InputErrorType;
+
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)]],
     rememberMe: [false],
   });
 
@@ -27,9 +30,19 @@ export class LoginComponent {
   ) {
   }
 
-  isFieldInvalid(fieldName: string): boolean {
+  isFieldInvalid(fieldName: string, errorType?: InputErrorType): boolean {
     const input = this.loginForm.get(fieldName);
-    return !!(input && input.invalid && (input.dirty || input.touched));
+    const isInvalid = !!(input && input.invalid && (input.dirty || input.touched));
+
+    if (!isInvalid) {
+      return false;
+    }
+
+    if (errorType) {
+      return input.hasError(errorType)
+    }
+
+    return true;
   }
 
   login(): void {

@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DefaultResponseType } from "../../../../types/default-response.type";
 import { LoginResponseType } from "../../../../types/login-response.type";
+import { InputErrorType } from "../../../../types/inputs-error.type";
 
 @Component({
   selector: 'app-signup',
@@ -14,10 +15,12 @@ import { LoginResponseType } from "../../../../types/login-response.type";
 })
 export class SignupComponent {
 
+  protected readonly InputErrorType = InputErrorType;
+
   signupForm = this.fb.group({
-    name: ['', [Validators.required]],
+    name: ['', [Validators.required, Validators.pattern(/^[А-ЯЁ][а-яё]*(?:\s[А-ЯЁ][а-яё]*)*$/)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)]],
     agree: [false, [Validators.requiredTrue]],
   });
 
@@ -28,9 +31,19 @@ export class SignupComponent {
   ) {
   }
 
-  isFieldInvalid(fieldName: string): boolean {
+  isFieldInvalid(fieldName: string, errorType?: InputErrorType): boolean {
     const input = this.signupForm.get(fieldName);
-    return !!(input && input.invalid && (input.dirty || input.touched));
+    const isInvalid = !!(input && input.invalid && (input.dirty || input.touched));
+
+    if (!isInvalid) {
+      return false;
+    }
+
+    if (errorType) {
+      return input.hasError(errorType)
+    }
+
+    return true;
   }
 
   signup(): void {

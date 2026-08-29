@@ -9,11 +9,22 @@
           <input type="email" class="input"
                  [ngStyle]="{'border-color': isFieldInvalid('email') ? 'red' : ''}"
                  placeholder="Электронная почта" formControlName="email">
+          <div class="error-message">
+            <span *ngIf="isFieldInvalid('email', InputErrorType.Required)">Email обязателен</span>
+            <span *ngIf="isFieldInvalid('email', InputErrorType.Email)">Такой Email не прошел бы проверку при регистрации</span>
+          </div>
         </div>
         <div class="auth-input">
           <input type="password" class="input"
                  [ngStyle]="{'border-color': isFieldInvalid('password') ? 'red' : ''}"
                  placeholder="Пароль" formControlName="password">
+          <div class="error-message">
+            <span *ngIf="isFieldInvalid('password', InputErrorType.Required)">Пароль обязателен</span>
+            <span *ngIf="isFieldInvalid('password', InputErrorType.MinLength)">Минимум 8 символов</span>
+            <br
+              *ngIf="isFieldInvalid('password', InputErrorType.MinLength) && isFieldInvalid('password', InputErrorType.Pattern)">
+            <span *ngIf="isFieldInvalid('password', InputErrorType.Pattern)">Нужна 1 заглавная буква и 1 цифра</span>
+          </div>
         </div>
         <div class="auth-checkbox">
           <input type="checkbox" id="remember-me-checkbox" formControlName="rememberMe">
