@@ -44,6 +44,44 @@
         }
       }
     }
+  }
+}
 
+@media (max-width: 600px) {
+  .terms {
+    .container {
+      .chapter-terms {
+        margin-top: 20px;
+        margin-bottom: 40px;
+
+        .chapter-title {
+          font-size: 32px;
+          margin-top: 20px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 300px) {
+  .terms {
+    .container {
+      .chapter-terms {
+        .chapter-title {
+          font-size: 20px;
+        }
+
+        .chapter-text {
+          h3 {
+            font-size: 16px;
+          }
+
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthService } from "../../../core/auth/auth.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "../../services/user.service";
 import { DefaultResponseType } from "../../../../types/default-response.type";
 import { UserInfoType } from "../../../../types/user-info.type";
@@ -14,7 +14,8 @@ import { UserInfoType } from "../../../../types/user-info.type";
 export class HeaderComponent {
 
   isLoggedIn: boolean = false;
-  userName = '';
+  userName: string = '';
+  isBurgerOpen: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -25,7 +26,7 @@ export class HeaderComponent {
     this.isLoggedIn = authService.getIsLoggedIn();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
       this.isLoggedIn = isLoggedIn;
       if (this.isLoggedIn) {
@@ -38,7 +39,7 @@ export class HeaderComponent {
     }
   }
 
-  getUserName() {
+  getUserName(): void {
     this.userService.getUserInfo()
       .subscribe((data: DefaultResponseType | UserInfoType) => {
         if ('error' in data) {
@@ -47,6 +48,16 @@ export class HeaderComponent {
           this.userName = data.name;
         }
       });
+  }
+
+  login(): void {
+    let excludedPaths = ['/login', '/signup'];
+    let url = this.router.url;
+
+    if (url && !excludedPaths.includes(url)) {
+      this.authService.pageBeforeLogin = url;
+    }
+    this.router.navigate(['/login']);
   }
 
   logout(): void {
@@ -67,6 +78,17 @@ export class HeaderComponent {
     this.isLoggedIn = false;
     this.userName = '';
     this.snackBar.open('Вы вышли из системы');
-    this.router.navigate(['/']);
+  }
+
+  toggleBurger(event: MouseEvent): void {
+    event.stopPropagation();
+    this.isBurgerOpen = !this.isBurgerOpen;
+  }
+
+  @HostListener('document:click')
+  closeBurger(): void {
+    if (this.isBurgerOpen) {
+      this.isBurgerOpen = false;
+    }
   }
 }

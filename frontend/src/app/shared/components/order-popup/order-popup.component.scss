@@ -214,3 +214,78 @@
     }
   }
 }
+
+@media (max-width: 1000px) {
+  .popup-screen {
+    .popup {
+      width: 72%;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .popup-screen {
+    .popup {
+      min-width: 75%;
+      padding: 15px;
+
+      .popup-title {
+        text-align: center;
+        font-size: 32px;
+      }
+
+      .form-inputs {
+        width: 75%;
+      }
+
+      .form-button-area {
+        width: 75%;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .popup-screen {
+    .popup {
+      padding: 10px;
+      box-sizing: border-box;
+      //left: 46%;              // для браузера на маленькой ширине в расчет середины вмешивается скроллбар, поэтому 46%
+
+      .popup-title {
+        font-size: 30px;
+      }
+
+      .form-inputs {
+        width: 85%;
+
+        .form-button-area {
+          width: 85%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .popup-screen {
+    .popup {
+      .form-inputs {
+        .form-input-material,
+        .form-input {
+          padding-right: 14px;
+        }
+
+        .form-input {
+          padding-left: 14px;
+        }
+      }
+
+      .form-button-area {
+        .form-button-error {
+          bottom: -42px;
+        }
+      }
+    }
+  }
+}

@@ -14,7 +14,7 @@ export class OurServicesCardComponent {
   constructor(private popupService: PopupService) {
   }
 
-  sendServiceName() {
+  sendServiceName(): void {
     this.popupService.dataSender(this.ourService.nameOfServiceCategory)
   }
 }

@@ -28,3 +28,59 @@
     }
   }
 }
+
+@media (max-width: 1400px) {
+  .signup {
+    .container {
+      gap: 15%;
+
+      .page-image {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .signup {
+    margin-top: 80px;
+    margin-bottom: 80px;
+
+    .container {
+      gap: 10%;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .signup {
+    margin-top: 60px;
+    margin-bottom: 60px;
+
+    .container {
+      gap: 5%;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .signup {
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    .container {
+      justify-content: center;
+
+      .page-image {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .signup {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

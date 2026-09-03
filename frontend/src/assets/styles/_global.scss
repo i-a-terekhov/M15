@@ -15,6 +15,7 @@ html, body {
 }
 
 .container {
+  width: 90%;
   max-width: $container-width;
   margin: 0 auto;
 }
@@ -36,7 +37,7 @@ html, body {
   }
 }
 
-.mat-progress-spinner circle, mat-spinner circle {  // этот блок для кольцевого лоадера
+.mat-progress-spinner circle, mat-spinner circle { // этот блок для кольцевого лоадера
   stroke: $hover-blue-color;
 }
 

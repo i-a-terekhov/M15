@@ -1,4 +1,6 @@
-<div class="banner" [style.background-image]="'url(\'' + banner.image + '\')'">
+<div class="banner"
+     [style.background-image]="'url(\'' + banner.image + '\')'"
+     [ngClass]="{'image-on-right': banner.imageOnRight}">
   <div class="banner-eclipse"></div>
   <div class="banner-content">
     <div class="additional-upper-space" *ngIf="banner.additionalUpperSpace"></div>

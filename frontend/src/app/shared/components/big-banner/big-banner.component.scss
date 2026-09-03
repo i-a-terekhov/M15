@@ -1,27 +1,22 @@
 @import "../../../../assets/styles/variables";
 
 .banner {
-  width: 1240px;
+  width: 100%;
   height: 500px;
   position: relative;
   overflow: hidden;
   background-repeat: no-repeat;
   background-position-x: calc(50% + 244px);
+  background-size: contain;
 
   .banner-eclipse {
     position: absolute;
     border-radius: 50%;
     background-color: $light-blue-color;
-
-    // ПОЗИЦИЯ: На 1250px равен calc(-500px - 35%), на 400px плавно опускается ниже
-    // Внимание: минимальное и максимальное значения в clamp() переставлены местами,
-    // так как математически (-500px - 35%) МЕНЬШЕ, чем (-500px + 15%)
-    top: clamp(calc(-518px - 37%), calc(-500px - 58.82vw + 385.3px), calc(-500px + 15%));
-    left: calc(-8px - 56%);
-
-    // ГАБАРИТЫ: На 1250px круг равен 1405px, на 400px плавно уменьшается до 1250px
-    width: clamp(1050px, calc(18.24vw + 1177px), 1405px);
-    height: clamp(1050px, calc(18.24vw + 1177px), 1405px);
+    top: -706px;
+    left: -701px;
+    width: 1405px;
+    height: 1405px;
   }
 
   .banner-content {
@@ -99,6 +94,161 @@
 
       &:active {
         transform: scale(0.95);
+      }
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .banner {
+    background-position-x: 520px;
+
+    &.image-on-right {
+      background-position: right;
+    }
+
+    .banner-eclipse {
+      transform: translateX(2%);
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .banner {
+    height: 415px;
+    background-position-x: 420px;
+
+    .banner-eclipse {
+      transform: translateX(-7%);
+    }
+
+    .banner-content {
+      padding: 40px 60px;
+
+      .title {
+        font-size: 45px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .banner {
+    height: 370px;
+    background-position-x: 330px;
+
+    .banner-eclipse {
+      transform: translateX(-16%);
+    }
+
+    .banner-content {
+      padding: 35px 45px;
+
+      .title {
+        font-size: 32px;
+      }
+
+      .additional-text {
+        font-size: 20px;
+        width: 50%;
+      }
+
+      .additional-lower-space {
+        height: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .banner {
+    height: 390px;
+    background-image: none !important;
+    background-color: $light-blue-color;
+
+    .banner-eclipse {
+      display: none;
+    }
+
+    .banner-content {
+      padding-bottom: 60px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      .additional-upper-space {
+        display: none;
+      }
+
+      .title {
+        font-size: 38px;
+        text-align: center;
+      }
+
+      .additional-text {
+        width: 100%;
+        text-align: center;
+      }
+
+      .additional-lower-space {
+        display: none;
+      }
+
+      .button {
+        width: 45%;
+        min-width: 200px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .banner {
+    height: 450px;
+
+    .banner-content {
+      .title {
+        font-size: 31px;
+        text-align: center;
+      }
+
+      .additional-text {
+        width: 100%;
+        text-align: center;
+      }
+
+      .additional-lower-space {
+        display: none;
+      }
+
+      .button {
+        width: 45%;
+        min-width: 200px;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .banner {
+    .banner-content {
+      .category-title {
+        font-size: 10px;
+      }
+
+      .title {
+        font-size: 24px;
+        line-height: 115%;
+      }
+
+      .additional-text {
+        font-size: 15px;
+      }
+
+      .button {
+        min-width: 170px;
       }
     }
   }

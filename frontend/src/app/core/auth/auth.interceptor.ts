@@ -49,7 +49,7 @@ export class AuthInterceptor implements HttpInterceptor {
       );
   }
 
-  handle401Error(req: HttpRequest<any>, next: HttpHandler) {
+  handle401Error(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.authService.refresh()
       .pipe(
         switchMap((result: DefaultResponseType | LoginResponseType) => {

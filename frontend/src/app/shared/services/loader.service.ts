@@ -10,11 +10,11 @@ export class LoaderService {
   constructor() {
   }
 
-  show() {
+  show(): void {
     this.isShowed$.next(true);
   }
 
-  hide() {
+  hide(): void {
     setTimeout(() => { // имитация задержки сервера
       this.isShowed$.next(false);
     }, 500);

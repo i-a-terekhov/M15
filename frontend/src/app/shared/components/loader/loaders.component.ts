@@ -13,7 +13,7 @@ export class LoadersComponent implements OnInit {
   isAngularMatLoaderShowed: boolean = false; // начальный лоудер (сейчас не используется)
   isCustomLoaderShowed: boolean = false;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loaderService.isShowed$.subscribe((isShowed: boolean) => {
       this.isCustomLoaderShowed = isShowed;
     });

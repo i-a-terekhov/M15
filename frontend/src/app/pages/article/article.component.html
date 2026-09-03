@@ -34,6 +34,12 @@
               </div>
             </div>
           </div>
+          <div class="inside-read-more">
+            <div class="read-more-title">Читайте также:</div>
+            <article-card *ngFor="let card of relatedArticleCards" [article]="card"></article-card>
+            <article-card *ngIf="relatedArticleCards.length === 0"></article-card>
+            <article-card *ngIf="relatedArticleCards.length === 0"></article-card>
+          </div>
           <div class="comments">
             <div class="empty-block" *ngIf="isLogged"></div>
             <div class="comments-title">Комментарии к статье</div>
@@ -59,7 +65,7 @@
                   <img src="{{ userWithoutPicPath }}" alt="userPic">
                   <div class="username-and-time">
                     <span class="username">{{ comment.user.name }}</span>
-                    <span class="time">{{ comment.date }}</span>
+                    <span class="time">{{ comment.date | date:'dd.MM.yyyy HH:mm' }}</span>
                   </div>
                 </div>
                 <div class="comment-text">{{ comment.text }}</div>

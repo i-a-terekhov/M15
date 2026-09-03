@@ -29,6 +29,7 @@ export class MainComponent {
       additionalText: 'Весь декабрь у нас действует акция<br>на работу копирайтера.',
       additionalLowerSpace: true,
       nameOfServiceCategory: 'Копирайтинг',
+      imageOnRight: true,
     },
     {
       image: 'assets/images/big-banner/Image(3).png',
@@ -146,13 +147,13 @@ export class MainComponent {
       0: {
         items: 1
       },
-      400: {
+      500: {
         items: 1
       },
-      740: {
+      745: {
         items: 2
       },
-      940: {
+      1185: {
         items: 3
       }
     },
@@ -162,7 +163,7 @@ export class MainComponent {
   constructor(private articlesService: ArticlesService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.articlesService.getPopularArticles()
       .subscribe((data: ArticleType[]) => {
         this.popularArticles = data;

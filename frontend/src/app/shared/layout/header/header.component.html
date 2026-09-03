@@ -5,7 +5,14 @@
         <use href="../../../assets/icons/icons.svg#main-icon"></use>
       </svg>
     </a>
-    <div class="header-menu">
+    <button class="burger" type="button"
+            (click)="toggleBurger($event)"
+            [class.open]="isBurgerOpen">
+      <svg width="24" height="24">
+        <use href="../../../assets/icons/icons.svg#burger"></use>
+      </svg>
+    </button>
+    <div class="header-menu" [class.open]="isBurgerOpen">
       <nav>
         <ul>
           <li><a routerLink="/" fragment="our-services" routerLinkActive="active"
@@ -30,12 +37,12 @@
       +7 (499) 343-13-34
     </a>
     <div class="login-action">
-      <a routerLink="/login" *ngIf="!isLoggedIn">
+      <button type="button" (click)="login()" *ngIf="!isLoggedIn">
         <svg width="24" height="24">
           <use href="../../../assets/icons/icons.svg#user-icon"></use>
         </svg>
         <span>Войти</span>
-      </a>
+      </button>
       <a [matMenuTriggerFor]="menu" *ngIf="isLoggedIn">
         <svg width="24" height="24">
           <use href="../../../assets/icons/icons.svg#user-icon"></use>

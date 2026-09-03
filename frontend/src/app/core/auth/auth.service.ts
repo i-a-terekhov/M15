@@ -12,6 +12,7 @@ export class AuthService {
   public accessTokenKey: string = 'accessToken';
   public refreshTokenKey: string = 'refreshToken';
   public userIdKey: string = 'userId';
+  public pageBeforeLoginKey: string = 'pageBeforeLoginKey';
 
   public isLogged$: Subject<boolean> = new Subject<boolean>();
   private isLogged: boolean = false;
@@ -53,7 +54,7 @@ export class AuthService {
   }
 
 
-  public getIsLoggedIn() {
+  public getIsLoggedIn(): boolean {
     return this.isLogged;
   }
 
@@ -87,6 +88,18 @@ export class AuthService {
       localStorage.setItem(this.userIdKey, id);
     } else {
       localStorage.removeItem(this.userIdKey);
+    }
+  }
+
+  get pageBeforeLogin(): null | string {
+    return localStorage.getItem(this.pageBeforeLoginKey);
+  }
+
+  set pageBeforeLogin(url: string | null) {
+    if (url) {
+      localStorage.setItem(this.pageBeforeLoginKey, url);
+    } else {
+      localStorage.removeItem(this.pageBeforeLoginKey);
     }
   }
 

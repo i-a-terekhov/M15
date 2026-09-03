@@ -23,4 +23,9 @@ export type FullCommentsType = {
   }
 }
 
+export type GetCommentsType = {
+  allCount: number;
+  comments: FullCommentsType[];
+}
+
 

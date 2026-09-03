@@ -13,7 +13,7 @@ export class PopupService {
   // внешний транслятор данных, который не позволит изменить dataTransceiver$ (т.к. не имеет таких методов как экземпляр Subject)
   popupDataSource$ = this.dataTransceiver$.asObservable();
 
-  dataSender(serviceName: string, popupType: PopupEnumType = PopupEnumType.order) {
+  dataSender(serviceName: string, popupType: PopupEnumType = PopupEnumType.order): void {
     this.dataTransceiver$.next({
       selectedOptionName: serviceName,
       popupType: popupType,

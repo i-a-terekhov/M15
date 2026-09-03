@@ -1,6 +1,7 @@
 @import "../../../assets/styles/variables";
 
 .main {
+  width: 100%;
 
   .container {
     display: flex;
@@ -42,7 +43,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: space-around;
         gap: 26px;
       }
     }
@@ -106,16 +107,15 @@
     .chapter-about-us {
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
       gap: 68px;
 
       .about-picture {
-        width: 460px;
+        max-width: 460px;
+        width: 38%;
         height: 453px;
         background-image: url("../../../assets/images/pages/advantages.png");
         background-repeat: no-repeat;
-        background-position-x: calc(0% + 0px);
-        z-index: -1;
+        background-position: center;
       }
 
       .about-content {
@@ -266,9 +266,7 @@
         }
       }
 
-
       .reviews-arrows {
-
         a {
           top: calc(50% + 20px);
           width: 10px;
@@ -347,6 +345,265 @@
             svg {
               margin-right: 20px;
               cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .main {
+    .container {
+      .chapter-about-us {
+        gap: 5%;
+
+        .about-content {
+          .advantages {
+            justify-content: flex-start;
+            max-width: none;
+          }
+        }
+      }
+
+      .chapter-reviews {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        ::ng-deep {
+          owl-carousel-o {
+            display: block;
+            width: 100%;
+
+            .owl-carousel {
+              .owl-item {
+                display: flex;
+                justify-content: center;
+
+                .reviews-card {
+                  min-width: 75%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .main {
+    .container {
+
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .main {
+    .container {
+      gap: 70px;
+
+      .chapter {
+        .chapter-title {
+          text-align: center;
+          font-size: 35px;
+          margin-bottom: 30px;
+        }
+      }
+
+      .chapter-about-us {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        .about-picture {
+          width: 55%;
+          height: 250px;
+          background-position: top;
+          background-size: cover;
+        }
+
+        .about-content {
+          max-width: none;
+
+          .description {
+            margin: 20px auto;
+            max-width: 85%;
+          }
+
+          .subtitle {
+            text-align: center;
+          }
+
+          .advantages {
+            justify-content: center;
+
+            .advantage {
+              .advantage-description {
+                max-width: 460px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .main {
+    .container {
+      .chapter {
+        .chapter-title {
+          font-size: 25px;
+          margin-bottom: 20px;
+        }
+      }
+
+      .chapter-reviews {
+        .reviews-arrows {
+          a {
+            &.move-backward {
+              left: 15px;
+            }
+
+            &.move-forward {
+              right: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    .container {
+      .chapter-about-us {
+        .about-picture {
+          width: 85%;
+        }
+
+        .about-content {
+          .description {
+          }
+
+          .subtitle {
+            font-size: 23px;
+          }
+
+          .advantages {
+            .advantage {
+              .advantage-description {
+                max-width: 320px;
+                width: 90%;
+              }
+            }
+          }
+        }
+      }
+
+      .chapter-reviews {
+        ::ng-deep {
+          owl-carousel-o {
+            .owl-carousel {
+              .owl-item {
+                .reviews-card {
+                  max-width: 85%;
+                  min-height: 330px;
+                }
+              }
+            }
+          }
+        }
+
+        .reviews-arrows {
+          a {
+            &.move-backward {
+              left: -5px;
+            }
+
+            &.move-forward {
+              right: -5px;
+            }
+          }
+        }
+      }
+
+      .chapter-contacts {
+        flex-direction: column;
+
+        .contacts-map {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .main {
+    .container {
+      .chapter-popular {
+        .popular-footer {
+          .link-to-blog {
+            span {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+
+      .chapter-reviews {
+        ::ng-deep {
+          owl-carousel-o {
+            .owl-carousel {
+              .owl-item {
+                .reviews-card {
+                  min-height: 470px;
+                  padding: 20px;
+
+                  .card-header {
+                    flex-direction: column;
+                    gap: 15px;
+                    width: 100%;
+
+                    .user-image {
+                      margin: 0 !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 300px) {
+  .main {
+    .container {
+      .chapter-reviews {
+        ::ng-deep {
+          owl-carousel-o {
+            .owl-carousel {
+              .owl-item {
+                .reviews-card {
+                  min-height: 530px;
+
+                  .card-user-review {
+                    font-size: 15px;
+                  }
+                }
+              }
             }
           }
         }

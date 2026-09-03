@@ -20,7 +20,7 @@ export class CategoriesService {
     return this.http.get<DefaultResponseType | CategoryRawType[]>(`${environment.api}categories`)
       .pipe(
         delay(3000),  // имитация задержки соединения: при задержке не показывается попап - только снекбар
-        map((data: DefaultResponseType | CategoryRawType[]) => {
+        map((data: DefaultResponseType | CategoryRawType[]): string[] => {
           if ('error' in data) {
             throw new Error(data.message);
           }

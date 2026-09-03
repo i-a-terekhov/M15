@@ -12,7 +12,7 @@ export class FooterComponent {
   constructor(private popupService: PopupService) {
   }
 
-  sendConsultRequest() {
+  sendConsultRequest(): void {
     this.popupService.dataSender('Консультация', PopupEnumType.consultation)
   }
 }

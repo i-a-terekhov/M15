@@ -30,19 +30,19 @@ export class BlogComponent {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.listenToCategories();
     this.listenToUrl();
   }
 
-  private listenToCategories() {
+  private listenToCategories(): void {
     this.categoryService.categoriesObjects$
       .subscribe((categories: CategoryType[]) => {
         this.categoriesFromServer = categories;
       });
   }
 
-  private listenToUrl() {
+  private listenToUrl(): void {
 
     this.activatedRoute.queryParamMap
       .pipe(
@@ -94,19 +94,19 @@ export class BlogComponent {
     return categoriesSetInFilter;
   }
 
-  isCategorySelected(category: CategoryType) {                                         // для пометки в элементе менюшки
+  isCategorySelected(category: CategoryType): boolean {                                // для пометки в элементе менюшки
     return this.activeQueryParams.categories.includes(category.url);
   }
 
-  get canGoToPreviousPage() {                                             // чтобы повесить [disabled] на кнопку "назад"
+  get canGoToPreviousPage(): boolean {                                    // чтобы повесить [disabled] на кнопку "назад"
     return this.activeQueryParams.page > 1;
   }
 
-  get canGoToNextPage() {                                                // чтобы повесить [disabled] на кнопку "вперед"
+  get canGoToNextPage(): boolean {                                       // чтобы повесить [disabled] на кнопку "вперед"
     return this.activeQueryParams.page < this.totalAmountOfPages;
   }
 
-  paginationHandler(value: 'next' | 'prev' | number) {
+  paginationHandler(value: 'next' | 'prev' | number): void {
     let filter: ActiveQueryParamsType = { page: 1, categories: this.activeQueryParams.categories };
 
     if (typeof value === "number") {
@@ -122,7 +122,7 @@ export class BlogComponent {
     this.navigateToFilter(filter);
   }
 
-  private navigateToFilter(filter: ActiveQueryParamsType) {
+  private navigateToFilter(filter: ActiveQueryParamsType): void {
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: {
@@ -132,7 +132,7 @@ export class BlogComponent {
     });
   }
 
-  toggleItem(category: CategoryType) {
+  toggleItem(category: CategoryType): void {
     let curCategories = this.activeQueryParams.categories;
 
     if (curCategories.includes(category.url)) {
@@ -143,12 +143,12 @@ export class BlogComponent {
     this.navigateToFilter(this.activeQueryParams);
   }
 
-  toggleDropdown() {
+  toggleDropdown(): void {
     this.isDropdownMenuOpen = !this.isDropdownMenuOpen;
   }
 
   @HostListener('document:click', ['$event'])
-  clickOut(event: Event) {
+  clickOut(event: Event): void {
     const target = event.target as HTMLElement;
     const clickedInsideDropdown = target.closest('.dropdown-area');
     if (!clickedInsideDropdown) {

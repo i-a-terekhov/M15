@@ -82,7 +82,7 @@
         <article-card [article]="article" *ngFor="let article of popularArticles"></article-card>
       </div>
       <div class="popular-footer">
-        <a href="" class="link-to-blog">
+        <a routerLink="/blog" class="link-to-blog">
           <span>Перейти в блог</span>
           <svg width="16" height="16">
             <use href="../../assets/icons/arrows.svg#popular-link-arrow-right"></use>
@@ -118,7 +118,7 @@
       <div class="contacts-map">
         <iframe
           src="https://yandex.ru/map-widget/v1/?um=constructor%3A1668d5f20bd636f52351b07d005af2c79f6aeb5780489b45087daddd228b5b22&amp;source=constructor"
-          width="607" height="438" frameborder="0"></iframe>
+          width="100%" height="100%" frameborder="0"></iframe>
       </div>
       <div class="contacts-content">
         <div class="chapter-title chapter-title--contacts">Контакты</div>

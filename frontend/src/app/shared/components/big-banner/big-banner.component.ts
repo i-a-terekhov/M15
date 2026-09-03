@@ -15,7 +15,7 @@ export class BigBannerComponent {
 constructor(private popupService: PopupService) {
 }
 
-  sendServiceName(serviceName: string) {
+  sendServiceName(serviceName: string): void {
     this.popupService.dataSender(serviceName);
   }
 }

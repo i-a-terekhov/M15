@@ -124,6 +124,10 @@
             }
           }
 
+          .inside-read-more {
+            display: none;
+          }
+
           .comments {
             margin-top: 60px;
 
@@ -368,5 +372,224 @@
       }
     }
 
+  }
+}
+
+@media (max-width: 1200px) {
+  .article {
+    .container {
+      .chapter {
+        margin-top: 40px;
+
+        .chapter-top-part {
+          gap: 70px;
+          margin-top: 40px;
+
+          .top-image-part {
+            width: 45%;
+          }
+        }
+
+        .chapter-central-part {
+          margin-top: 40px;
+          gap: 60px;
+
+          .main-thread {
+            .contacts {
+              margin-top: 30px;
+              margin-bottom: 30px;
+              justify-content: flex-start;
+
+              .contacts-actions {
+                min-width: 130px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .article {
+    .container {
+      .chapter {
+        .chapter-central-part {
+          .main-thread {
+            .inside-read-more {
+              display: flex;
+              row-gap: 15px;
+              column-gap: 30px;
+              flex-wrap: wrap;
+              justify-content: space-around;
+
+              .read-more-title {
+                width: 90%;
+              }
+            }
+          }
+
+          .aside-read-more {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .article {
+    .container {
+      .chapter {
+        .chapter-top-part {
+          gap: 25px;
+          flex-wrap: wrap-reverse;
+
+          .top-image-part {
+            width: 100%;
+          }
+
+          .chapter-title--article {
+            margin-bottom: 25px;
+          }
+        }
+
+        .chapter-central-part {
+          margin-top: 30px;
+
+          .main-thread {
+            .article-text {
+              ::ng-deep h3 {
+                margin-top: 30px;
+                margin-bottom: 10px;
+                font-size: 18px;
+              }
+
+              ::ng-deep p {
+                margin-bottom: 10px;
+              }
+            }
+
+            .comments {
+              margin-top: 30px;
+
+              .empty-block {
+                height: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .article {
+    margin-top: 40px;
+
+    .container {
+      .chapter {
+        margin-top: 20px;
+
+        .chapter-top-part {
+          margin-top: 20px;
+
+          .top-text-part {
+            .chapter-title--article {
+              font-size: 30px;
+              margin-bottom: 30px;
+            }
+
+            .title-description {
+              font-size: 18px;
+            }
+          }
+        }
+
+        .chapter-central-part {
+          .main-thread {
+            .comments {
+              margin-top: 30px;
+
+              .empty-block {
+                height: 20px;
+              }
+
+              .comments-title {
+                font-size: 30px;
+              }
+
+              .user-comments-make-area {
+                button {
+                  width: 100%;
+                }
+              }
+
+              .get-more-comments {
+                span {
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .article {
+    .container {
+      .chapter {
+        .chapter-top-part {
+        }
+
+        .chapter-central-part {
+          .main-thread {
+            .contacts {
+              .contacts-actions {
+                min-width: 65px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 300px) {
+  .article {
+    .container {
+      .chapter {
+        .chapter-central-part {
+          .main-thread {
+            .comments {
+              .other-user-comments {
+                .comment {
+                  .comment-header {
+                    gap: 15px;
+
+                    .username-and-time {
+                      .username {
+                        font-size: 14px;
+                      }
+                    }
+                  }
+
+                  .comment-text {
+                    margin-bottom: 15px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

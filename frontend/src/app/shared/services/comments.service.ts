@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { CommentReactionType, ReactionActionType } from "../../../types/comments.type";
 import { DefaultResponseType } from "../../../types/default-response.type";
+import { GetCommentsType } from "../../../types/fullArticle.type";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class CommentsService {
   constructor(private http: HttpClient) {
   }
 
-  getMoreComments(params: { offset: number, article: string }): Observable<any> {
-    return this.http.get<{ allCount: number, comments: [] }>(`${environment.api}comments`, { params });
+  getMoreComments(params: { offset: number, article: string }): Observable<GetCommentsType> {
+    return this.http.get<GetCommentsType>(`${environment.api}comments`, { params });
   }
 
   getUserReactions(articleId: string): Observable<CommentReactionType[]> {

@@ -73,7 +73,12 @@ export class LoginComponent {
             this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
             this.authService.userId = loginResponse.userId;
             this.snackBar.open('Вы успешно авторизовались');
-            this.router.navigate(['/']);
+            if (this.authService.pageBeforeLogin) {
+              this.router.navigate([this.authService.pageBeforeLogin])
+            } else {
+              this.router.navigate(['/']);
+            }
+
           },
           error: (errorResponse: HttpErrorResponse) => {
             if (errorResponse.error && errorResponse.error.message) {

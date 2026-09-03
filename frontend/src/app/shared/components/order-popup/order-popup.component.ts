@@ -40,7 +40,7 @@ export class OrderPopupComponent {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.popupService.popupDataSource$.subscribe(
       ({ selectedOptionName, popupType }) => {
         this.popupType = popupType;

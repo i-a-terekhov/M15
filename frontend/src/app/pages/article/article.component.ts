@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { environment } from "../../../environments/environment";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { AuthService } from "../../core/auth/auth.service";
-import { forkJoin, of, Subject, switchMap, takeUntil, tap } from "rxjs";
-import { FullArticleType, FullCommentsType } from "../../../types/fullArticle.type";
+import { forkJoin, Observable, of, Subject, switchMap, takeUntil, tap } from "rxjs";
+import { FullArticleType, FullCommentsType, GetCommentsType } from "../../../types/fullArticle.type";
 import { ArticlesService } from "../../shared/services/articles.service";
 import { CommentsService } from "../../shared/services/comments.service";
 import { CommentReactionType, ReactionActionType } from "../../../types/comments.type";
@@ -42,18 +42,18 @@ export class ArticleComponent {
     this.isLogged = authService.getIsLoggedIn();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authService.isLogged$
       .pipe(takeUntil(this.destroy$))
       .subscribe(isLoggedIn => this.isLogged = isLoggedIn);
 
     this.activatedRoute.paramMap
       .pipe(
-        switchMap((paramMap: ParamMap) => {
+        switchMap((paramMap: ParamMap): Observable<FullArticleType | null> => {
           const url = paramMap.get('url');
           return url ? this.articlesService.getFullArticle(url) : of(null);
         }),
-        switchMap(article => {
+        switchMap((article: FullArticleType | null) => {
           if (!article) return of(null);
 
           return forkJoin({
@@ -64,7 +64,10 @@ export class ArticleComponent {
         takeUntil(this.destroy$) // Защита от утечки памяти
       )
       .subscribe({
-        next: (data) => {
+        next: (data: {
+          article: FullArticleType
+          related: ArticleType[]
+        } | null) => {
           if (!data) return;
 
           const { article, related } = data;
@@ -85,7 +88,7 @@ export class ArticleComponent {
       });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -118,13 +121,13 @@ export class ArticleComponent {
     return this.staticPathForImages + img;
   }
 
-  getMoreComments() {
+  getMoreComments(): void {
     this.commentsService.getMoreComments({
       offset: this.appearedComments.length,
       article: this.fullArticle!.id
     })
       .subscribe(newPortionOfComments => {
-        this.appearedComments = [...this.appearedComments, ...newPortionOfComments.comments]; // перезапись позволит
+        this.appearedComments = [...this.appearedComments, ...newPortionOfComments.comments];
       })
   }
 
@@ -184,7 +187,7 @@ export class ArticleComponent {
       })
   }
 
-  postUserReaction(commentId: string, action: ReactionActionType) {
+  postUserReaction(commentId: string, action: ReactionActionType): void {
     const previousAction = this.userReactionByCommentId.get(commentId) ?? null;
     const nextAction = previousAction === action ? null : action;
 

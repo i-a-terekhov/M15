@@ -1,6 +1,7 @@
 @import "variables";
 
 .auth-form {
+  min-width: 430px;
 
   .auth-title {
     font-family: 'Lora', sans-serif;
@@ -103,6 +104,50 @@
       color: $usual-blue-color;
       text-decoration: none;
       cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .auth-form {
+    min-width: auto;
+
+    .auth-title {
+      font-size: 30px;
+    }
+
+    .auth-inputs {
+      margin-top: 20px;
+      margin-bottom: 25px;
+
+      .auth-input {
+        .input {
+          width: 100%;
+        }
+      }
+    }
+
+    .auth-button {
+      .button {
+        width: 100%;
+        padding: 14px 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .auth-form {
+    .auth-title {
+      font-size: 22px;
+    }
+
+    .auth-inputs {
+      .auth-input {
+        .input {
+          padding: 14px;
+        }
+      }
     }
   }
 }

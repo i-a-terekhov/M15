@@ -16,6 +16,14 @@
       fill="#709FDC"/>
   </symbol>
 
+  <symbol id="burger" viewBox="0 0 24 24" fill="none">
+    <svg>
+      <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+      <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+      <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </symbol>
+
   <symbol id="user-icon" viewBox="0 0 24 24" fill="none">
     <path
       d="M18.1399 21.62C17.2599 21.88 16.2199 22 14.9999 22H8.99986C7.77986 22 6.73986 21.88 5.85986 21.62C6.07986 19.02 8.74986 16.97 11.9999 16.97C15.2499 16.97 17.9199 19.02 18.1399 21.62Z"

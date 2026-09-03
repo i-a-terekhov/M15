@@ -67,3 +67,50 @@
     color: $usual-blue-color;
   }
 }
+
+@media (max-width: 400px) {
+
+  .article-card {
+    width: 100%;
+    max-width: 290px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+
+    .card-image {
+      width: 100%;
+      height: 291px;
+      justify-self: center;
+    }
+
+    .card-description {
+      text-align: justify;
+      width: auto;
+    }
+
+    .card-footer {
+      flex-direction: column;
+      gap: 15px;
+
+      .price {
+        align-self: flex-start;
+      }
+
+      .card-button {
+        align-self: flex-end;
+      }
+    }
+  }
+}
+
+@media (max-width: 300px) {
+
+  .article-card {
+    box-sizing: border-box;
+    padding: 5px;
+
+    .card-image {
+      height: 190px;
+    }
+  }
+}
